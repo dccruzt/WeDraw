@@ -1,10 +1,10 @@
 *.iml
 .gradle
 /local.properties
-/.idea
-/.idea/vcs.xml
-/.idea/gradle.xml
-/.idea/misc.xml
+.idea/
+.idea/vcs.xml
+.idea/gradle.xml
+.idea/misc.xml
 /.idea/libraries
 .DS_Store
 /build
