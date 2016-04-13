@@ -24,7 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ConnectActivity">
+
+        <activity
+            android:name=".ConnectActivity"
+            android:screenOrientation="landscape">
+        </activity>
+
+        <activity
+            android:name=".InputNameActivity"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 

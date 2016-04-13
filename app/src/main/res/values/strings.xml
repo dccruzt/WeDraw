@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WeDraw</string>
+    <string name="select_tv">Seleccionar WebOS TV</string>
+    <string name="input_name">Bienvenido al juego, ingresa tu nombre para continuar</string>
+    <string name="connect">Connectar</string>
+    <string name="play">Jugar</string>
+    <string name="waiting_players">Esperando Jugadores...</string>
 </resources>
