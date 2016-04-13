@@ -1,27 +1,61 @@
 package upc.edu.pe.wedraw;
 
 import android.app.Activity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.connectsdk.device.ConnectableDevice;
+import com.connectsdk.device.DevicePicker;
+import com.connectsdk.service.WebOSTVService;
+
+import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 
 public class ConnectActivity extends AppCompatActivity {
 
     ListView mTvListView;
-    TvAdapter mTvAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
+
+        ConnectionHelper.sDesaplgListener.setConnectActivity(this);
+        mTvListView = (ListView) findViewById(R.id.activity_connect_tv_list);
+
+        listTvs();
+    }
+
+    private void listTvs(){
+        DevicePicker picker = new DevicePicker(this);
+        ListView tvPickerListView = picker.getListView();
+
+        mTvListView.setAdapter(new TvAdapter(tvPickerListView.getAdapter(), this));
+        mTvListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    ConnectionHelper.sConnectableDevice = (ConnectableDevice)parent.getItemAtPosition(position);
+                    ConnectionHelper.sWebOSTVService = (WebOSTVService)ConnectionHelper.sConnectableDevice.getServiceByName(WebOSTVService.ID);
+                    ConnectionHelper.sWebOSTVService.connect();
+                    //Lanzar Web app WeDraw
+
+                } catch (Exception ex) {
+                    new AlertDialog.Builder(getApplicationContext())
+                            .setTitle("WeDraw")
+                            .setMessage("No se pudo connectar a la TV")
+                            .create();
+                }
+            }
+        });
     }
 
 

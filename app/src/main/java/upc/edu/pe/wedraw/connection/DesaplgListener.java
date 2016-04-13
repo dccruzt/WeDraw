@@ -3,6 +3,7 @@ package upc.edu.pe.wedraw.connection;
 import com.connectsdk.service.sessions.WebAppSession;
 import com.connectsdk.service.sessions.WebAppSessionListener;
 
+import upc.edu.pe.wedraw.ConnectActivity;
 import upc.edu.pe.wedraw.SplashActivity;
 
 /**
@@ -11,6 +12,7 @@ import upc.edu.pe.wedraw.SplashActivity;
 public class DesaplgListener implements WebAppSessionListener{
 
     private SplashActivity mSplashActivity;
+    private ConnectActivity mConnectActivity;
 
     public SplashActivity getSplashActivity() {
         return mSplashActivity;
@@ -18,6 +20,14 @@ public class DesaplgListener implements WebAppSessionListener{
 
     public void setSplashActivity(SplashActivity splashActivity) {
         mSplashActivity = splashActivity;
+    }
+
+    public ConnectActivity getConnectActivity() {
+        return mConnectActivity;
+    }
+
+    public void setConnectActivity(ConnectActivity connectActivity) {
+        mConnectActivity = connectActivity;
     }
 
     @Override
