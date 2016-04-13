@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceLarge"
+        android:textSize="@dimen/text_size_normal"
         android:text="@string/input_name"
         android:layout_margin="32dp"
         android:textAlignment="center"
@@ -21,7 +21,7 @@
 
     <EditText
         android:id="@+id/activity_input_name_edit_text"
-        android:layout_width="200dp"
+        android:layout_width="@dimen/input_width"
         android:layout_height="wrap_content"
         android:inputType="text"
         tools:text="Name"
@@ -30,35 +30,39 @@
 
     <Button
         android:id="@+id/activity_input_name_button"
-        android:layout_width="200dp"
+        android:layout_width="@dimen/input_width"
         android:layout_height="wrap_content"
+        android:padding="16dp"
         android:text="@string/connect"
+        android:textSize="@dimen/button_text_size_normal"
         android:layout_gravity="center_horizontal" />
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_gravity="right|bottom"
+        android:layout_gravity="right"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:layout_marginRight="32dp"
         >
 
         <Button
             android:id="@+id/activity_input_name_sound_button"
+            android:layout_gravity="bottom"
             android:layout_width="@dimen/option_button"
             android:layout_height="@dimen/option_button"
             android:background="@drawable/sound"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            android:layout_gravity="bottom"/>
+            />
 
         <Button
             android:id="@+id/activity_input_name_info_button"
+            android:layout_gravity="bottom"
             android:layout_width="@dimen/option_button"
             android:layout_height="@dimen/option_button"
             android:background="@drawable/info"
             android:layout_marginBottom="16dp"
-            android:layout_gravity="bottom"/>
+            />
     </LinearLayout>
 
 </LinearLayout>

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="logo_size_normal">200dp</dimen>
-    <dimen name="logo_size_small">160dp</dimen>
-    <dimen name="option_button">120dp</dimen>
+    8<dimen name="logo_size_small">160dp</dimen>
+    <dimen name="option_button">80dp</dimen>
+    <dimen name="text_size_normal">64dp</dimen>
+    <dimen name="button_text_size_normal">32dp</dimen>
+    <dimen name="input_width">600dp</dimen>
+    <dimen name="text_item_height">60dp</dimen>
+    <dimen name="text_item_size">32dp</dimen>
 </resources>
