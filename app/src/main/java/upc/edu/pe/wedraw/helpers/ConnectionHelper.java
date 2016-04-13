@@ -13,6 +13,12 @@ import upc.edu.pe.wedraw.connection.DesaplgListener;
 
 /**
  * Created by Andres Revolledo on 4/12/16.
+ * Esta clase maneja durante el tiempo de vida de la aplicacion
+ * los objetos encargados de realizar la comunicacion con la aplicacion web
+ *
+ * @author Daniela Cruz
+ * @author Victor Vasquez
+ * @author Andres Revolledo
  */
 public class ConnectionHelper {
     public static DiscoveryManager sDiscoveryManager;
@@ -22,26 +28,22 @@ public class ConnectionHelper {
     public static DesaplgListener sDesaplgListener;
     public static Context sContext;
 
-    public static void closeApplication(boolean closeWebApp) {
-        if( closeWebApp ) {
-            sWebAppSession.close(new ResponseListener<Object>() {
-                @Override
-                public void onSuccess(Object object) {
+    public static void closeApplication() {
+        sWebAppSession.close(new ResponseListener<Object>() {
+            @Override
+            public void onSuccess(Object object) {
 
-                }
-
-                @Override
-                public void onError(ServiceCommandError error) {
-
-                }
-            });
-
-            if (sWebAppSession != null) {
-                sWebAppSession.disconnectFromWebApp();
-                sWebAppSession = null;
             }
-        }
 
-        System.exit(1);
+            @Override
+            public void onError(ServiceCommandError error) {
+
+            }
+        });
+
+        if (sWebAppSession != null) {
+            sWebAppSession.disconnectFromWebApp();
+            sWebAppSession = null;
+        }
     }
 }

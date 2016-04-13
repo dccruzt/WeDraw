@@ -14,6 +14,14 @@ import java.util.TimerTask;
 import upc.edu.pe.wedraw.connection.DesaplgListener;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 
+/*
+ * Actividad Splash, se encarga de inicializar el contexto y el listener de la aplicacion
+ * ademas de iniciar el DiscoveryManager para iniciar la busqueda de TVs en la red.
+ *
+ * @author Daniela Cruz
+ * @author Victor Vasquez
+ * @author Andres Revolledo
+ */
 public class SplashActivity extends Activity {
 
     private final int SPLASH_DISPLAY_TIME = 5000;
