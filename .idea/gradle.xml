@@ -9,8 +9,14 @@
         <option name="gradleJvm" value="1.7" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$USER_HOME$/Sync/AndroidStudioProjects/WeDraw" />
+            <option value="$USER_HOME$/Sync/AndroidStudioProjects/WeDraw/app" />
+          </set>
+        </option>
+        <option name="myModules">
+          <set>
+            <option value="$USER_HOME$/Sync/AndroidStudioProjects/WeDraw" />
+            <option value="$USER_HOME$/Sync/AndroidStudioProjects/WeDraw/app" />
           </set>
         </option>
       </GradleProjectSettings>

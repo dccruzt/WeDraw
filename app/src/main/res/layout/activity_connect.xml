@@ -28,5 +28,6 @@
     android:layout_marginLeft="32dp"
     android:layout_marginRight="32dp"
     android:layout_height="match_parent"/>
+
 </LinearLayout>
 
