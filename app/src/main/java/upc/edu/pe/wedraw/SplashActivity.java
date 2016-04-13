@@ -2,6 +2,7 @@ package upc.edu.pe.wedraw;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 
 public class SplashActivity extends Activity {
 
+    private final int SPLASH_DISPLAY_TIME = 5000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,19 +27,16 @@ public class SplashActivity extends Activity {
         ConnectionHelper.sDesaplgListener = new DesaplgListener();
 
         startDiscovery();
+        ConnectionHelper.sDesaplgListener.setSplashActivity(this);
 
-        TimerTask task = new TimerTask() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent i = new Intent(SplashActivity.this, ConnectActivity.class);
-                startActivity(i);
-                finish();
+                SplashActivity.this.startActivity(i);
+                SplashActivity.this.finish();
             }
-        };
-
-        ConnectionHelper.sDesaplgListener.setSplashActivity(this);
-
-        new Timer().schedule(task, 5000);
+        }, SPLASH_DISPLAY_TIME);
     }
 
     public void startDiscovery() {
