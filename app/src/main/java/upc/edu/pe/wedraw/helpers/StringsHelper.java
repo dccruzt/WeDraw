@@ -12,8 +12,11 @@ package upc.edu.pe.wedraw.helpers;
 public class StringsHelper {
     public static String ACTION = "accion";
     public static String RESULT = "resultado";
+    public static String PLAYER = "jugador";
+
 
     //Acciones enviadas
     public static String CONNECT_TV = "conectarTV";
+    public static String CONNECT_PLAYER = "conectarJugador";
 
 }

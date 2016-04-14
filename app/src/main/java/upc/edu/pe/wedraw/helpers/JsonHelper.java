@@ -26,4 +26,16 @@ public class JsonHelper {
             return null;
         }
     }
+
+    public static JSONObject ConnectPlayer(String player){
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put(StringsHelper.ACTION, StringsHelper.CONNECT_PLAYER);
+            jsonObject.put(StringsHelper.PLAYER, player);
+            return jsonObject;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
 }

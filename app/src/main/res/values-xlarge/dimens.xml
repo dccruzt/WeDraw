@@ -8,4 +8,8 @@
     <dimen name="input_width">600dp</dimen>
     <dimen name="text_item_height">60dp</dimen>
     <dimen name="text_item_size">32dp</dimen>
+    <dimen name="button_padding">32dp</dimen>
+    <dimen name="text_margin">24dp</dimen>
+    <dimen name="connect_button">256dp</dimen>
+    <dimen name="connect_button_text_size">48dp</dimen>
 </resources>

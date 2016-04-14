@@ -86,7 +86,10 @@ public class ConnectActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(ServiceCommandError error) {
-
+                                    new AlertDialog.Builder(getApplicationContext())
+                                            .setTitle("WeDraw")
+                                            .setMessage("No se pudo connectar a la TV")
+                                            .create();
                                 }
                             });
 

@@ -6,6 +6,7 @@ import com.connectsdk.service.sessions.WebAppSessionListener;
 import upc.edu.pe.wedraw.ConnectActivity;
 import upc.edu.pe.wedraw.InputNameActivity;
 import upc.edu.pe.wedraw.SplashActivity;
+import upc.edu.pe.wedraw.StartGameActivity;
 
 /**
  * Created by Andres Revolledo on 4/12/16.
@@ -22,6 +23,7 @@ public class DesaplgListener implements WebAppSessionListener{
     private SplashActivity mSplashActivity;
     private ConnectActivity mConnectActivity;
     private InputNameActivity mInputNameActivity;
+    private StartGameActivity mStartGameActivity;
 
     public SplashActivity getSplashActivity() {
         return mSplashActivity;
@@ -47,6 +49,14 @@ public class DesaplgListener implements WebAppSessionListener{
         mInputNameActivity = inputNameActivity;
     }
 
+    public StartGameActivity getStartGameActivity() {
+        return mStartGameActivity;
+    }
+
+    public void setStartGameActivity(StartGameActivity startGameActivity) {
+        mStartGameActivity = startGameActivity;
+    }
+
     @Override
     public void onReceiveMessage(WebAppSession webAppSession, Object message) {
 
@@ -56,4 +66,6 @@ public class DesaplgListener implements WebAppSessionListener{
     public void onWebAppSessionDisconnect(WebAppSession webAppSession) {
 
     }
+
+
 }

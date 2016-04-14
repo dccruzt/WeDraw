@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="fillButton">#FF2020</color>
+    <color name="borderButton">#040404</color>
+    <color name="disableButton">#979797</color>
 </resources>
