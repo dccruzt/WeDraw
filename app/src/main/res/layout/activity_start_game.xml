@@ -5,10 +5,11 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/goBackButton"
+    <Button
+        android:id="@+id/activity_start_game_back_button"
         android:layout_width="@dimen/option_button"
         android:layout_height="@dimen/option_button"
+        android:background="@drawable/back"
         android:layout_marginBottom="16dp"
         android:layout_gravity="left|top"
         android:layout_marginTop="8dp"
@@ -60,7 +61,7 @@
         >
 
         <Button
-            android:id="@+id/activity_input_name_sound_button"
+            android:id="@+id/activity_start_game_sound_button"
             android:layout_gravity="bottom"
             android:layout_width="@dimen/option_button"
             android:layout_height="@dimen/option_button"
@@ -70,7 +71,7 @@
             />
 
         <Button
-            android:id="@+id/activity_input_name_info_button"
+            android:id="@+id/activity_start_game_info_button"
             android:layout_gravity="bottom"
             android:layout_width="@dimen/option_button"
             android:layout_height="@dimen/option_button"
