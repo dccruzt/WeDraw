@@ -3,13 +3,9 @@ package upc.edu.pe.wedraw;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.connectsdk.discovery.DiscoveryManager;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import upc.edu.pe.wedraw.connection.DesaplgListener;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
@@ -21,7 +17,7 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.layout_splash);
 
         ConnectionHelper.sContext = getApplicationContext();
         ConnectionHelper.sDesaplgListener = new DesaplgListener();
