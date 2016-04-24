@@ -2,6 +2,7 @@ package upc.edu.pe.wedraw;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class ConnectActivity extends AppCompatActivity {
 
     static final String WEBAPP = "wedraw";
     ListView mTvListView;
+    private TvAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,58 +56,76 @@ public class ConnectActivity extends AppCompatActivity {
      *  E implementa la conexion con la TV selecionada
      */
     private void listTvs(){
+        //Obtener lista de devices provista por el sdk
         DevicePicker picker = new DevicePicker(this);
         ListView tvPickerListView = picker.getListView();
-
-        mTvListView.setAdapter(new TvAdapter(tvPickerListView.getAdapter(), this));
-        mTvListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListAdapter pickerAdapter = tvPickerListView.getAdapter();
+        //Setear el adapter que mostrará la lista de TVs
+        mAdapter = new TvAdapter(pickerAdapter, this);
+        mTvListView.setAdapter(mAdapter);
+        //Detectar los cambios en la lista de dispositivos y actualizar la lista
+        pickerAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try {
-                    ConnectionHelper.sConnectableDevice = (ConnectableDevice)parent.getItemAtPosition(position);
-                    ConnectionHelper.sWebOSTVService = (WebOSTVService)ConnectionHelper.sConnectableDevice.getServiceByName(WebOSTVService.ID);
-                    ConnectionHelper.sWebOSTVService.connect();
-                    //Lanzar Web app WeDraw
-                    ConnectionHelper.sWebOSTVService.joinWebApp(WEBAPP, new WebAppSession.LaunchListener() {
-                        @Override
-                        public void onSuccess(WebAppSession object) {
-                            ConnectionHelper.sWebAppSession = object;
-                            //Conecta Jugador a Tv
-                            ConnectPlayerTv();
-                        }
-
-                        @Override
-                        public void onError(ServiceCommandError error) {
-                            ConnectionHelper.sWebOSTVService.launchWebApp(WEBAPP, new WebAppSession.LaunchListener() {
-                                @Override
-                                public void onSuccess(WebAppSession object) {
-                                    ConnectionHelper.sWebAppSession = object;
-                                    //Conecta Jugador a Tv
-                                    ConnectPlayerTv();
-                                }
-
-                                @Override
-                                public void onError(ServiceCommandError error) {
-                                    new AlertDialog.Builder(getApplicationContext())
-                                            .setTitle("WeDraw")
-                                            .setMessage("No se pudo connectar a la TV")
-                                            .create();
-                                }
-                            });
-
-                        }
-                    });
-                    Intent i = new Intent(ConnectActivity.this, InputNameActivity.class);
-                    startActivity(i);
-
-                } catch (Exception ex) {
-                    new AlertDialog.Builder(getApplicationContext())
-                            .setTitle("WeDraw")
-                            .setMessage("No se pudo connectar a la TV")
-                            .create();
-                }
+            public void onChanged() {
+                super.onChanged();
+                mAdapter.notifyDataSetChanged();
             }
         });
+        //Detectar cuando se selecciona un item de la lista
+        mTvListView.setOnItemClickListener(new TVSelectedCallback());
+    }
+
+    /**
+     * Clase que implementa se encargará de manejar la selección de uno de los items
+     * de la lista de TVs
+     */
+    class TVSelectedCallback implements AdapterView.OnItemClickListener{
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            try {
+                ConnectionHelper.sConnectableDevice = (ConnectableDevice)parent.getItemAtPosition(position);
+                ConnectionHelper.sWebOSTVService = (WebOSTVService)ConnectionHelper.sConnectableDevice.getServiceByName(WebOSTVService.ID);
+                ConnectionHelper.sWebOSTVService.connect();
+                //Lanzar Web app WeDraw
+                ConnectionHelper.sWebOSTVService.joinWebApp(WEBAPP, new WebAppSession.LaunchListener() {
+                    @Override
+                    public void onSuccess(WebAppSession object) {
+                        ConnectionHelper.sWebAppSession = object;
+                        //Conecta Jugador a Tv
+                        ConnectPlayerTv();
+                    }
+
+                    @Override
+                    public void onError(ServiceCommandError error) {
+                        ConnectionHelper.sWebOSTVService.launchWebApp(WEBAPP, new WebAppSession.LaunchListener() {
+                            @Override
+                            public void onSuccess(WebAppSession object) {
+                                ConnectionHelper.sWebAppSession = object;
+                                //Conecta Jugador a Tv
+                                ConnectPlayerTv();
+                            }
+
+                            @Override
+                            public void onError(ServiceCommandError error) {
+                                new AlertDialog.Builder(getApplicationContext())
+                                        .setTitle("WeDraw")
+                                        .setMessage("No se pudo connectar a la TV")
+                                        .create();
+                            }
+                        });
+
+                    }
+                });
+                Intent i = new Intent(ConnectActivity.this, InputNameActivity.class);
+                startActivity(i);
+
+            } catch (Exception ex) {
+                new AlertDialog.Builder(ConnectActivity.this)
+                        .setTitle("WeDraw")
+                        .setMessage("No se pudo connectar a la TV")
+                        .show();
+            }
+        }
     }
 
     @Override
