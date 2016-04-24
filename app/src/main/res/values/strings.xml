@@ -5,4 +5,5 @@
     <string name="connect">Connectar</string>
     <string name="play">Jugar</string>
     <string name="waiting_players">Esperando Jugadores...</string>
+    <string name="start_game">Para iniciar presione el botón JUGAR</string>
 </resources>

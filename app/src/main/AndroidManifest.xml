@@ -34,6 +34,10 @@
             android:name=".InputNameActivity"
             android:screenOrientation="landscape">
         </activity>
+        <activity
+            android:name=".StartGameActivity"
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>

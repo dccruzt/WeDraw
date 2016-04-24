@@ -18,18 +18,13 @@ import upc.edu.pe.wedraw.interfaces.Typefaceable;
  */
 public class FontHelper {
 
-    private enum Fonts{
-        BIKO("circular_bold.otf");
-        private String mFont;
-        Fonts(String font){
-            mFont = font;
-        }
-        public static Typeface get(Context context, int font){
-            return FontHelper.getTypeface(context,Fonts.values()[font].mFont);
-        }
-    }
 
-
+    /**
+     * Setea un tipo de fuente a una vista que implemente la interfaz Typefaceable, en base a los atributos que se pasen
+     * @param context contexto de la aplicación
+     * @param attrs atributos de la vista
+     * @param view vista a la cual se le aplicará la fuente
+     */
     public static void apply(Context context, AttributeSet attrs, Typefaceable view) {
         final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.FontAttributes);
         Typeface typeface = null;
@@ -46,30 +41,44 @@ public class FontHelper {
             view.setTypeface(typeface);
     }
 
-    private static Map<String, Typeface> mTypefaces;
-
     /**
-     * Tratará de obtener una fuente de los assets. Los almacenerá en
-     * un mapa para optimizar la reutilización de las fuentes.
-     * @param context
-     * @param typefaceName
-     * @return
+     * Fuentes que soportará nuestra aplicación
      */
-    public static Typeface getTypeface(Context context, String typefaceName){
-        Typeface typeface = null;
-        //Inicializar mapa
-        if(mTypefaces==null)
-            mTypefaces = new HashMap<>();
-        //Buscar el si la fuente ya había sido preguntar
-        if (mTypefaces.containsKey(typefaceName)) {
-            typeface = mTypefaces.get(typefaceName);
-        } else
-        {
-            AssetManager assets = context.getAssets();
-            typeface = Typeface.createFromAsset(assets, typefaceName);
-            mTypefaces.put(typefaceName, typeface);
+    private enum Fonts{
+        BIKO("Biko_Regular.otf"); //TODO: setear la fuente correcta
+        private String mFont;
+        Fonts(String font){
+            mFont = font;
         }
-        return typeface;
-    }
+        public static Typeface get(Context context, int font){
+            return getTypeface(context,Fonts.values()[font].mFont);
+        }
 
+
+        private static Map<String, Typeface> mTypefaces;
+        /**
+         * Tratará de obtener una fuente de los assets. Los almacenerá en
+         * un mapa para optimizar la reutilización de las fuentes.
+         * @param context
+         * @param typefaceName
+         * @return
+         */
+        public static Typeface getTypeface(Context context, String typefaceName){
+            Typeface typeface = null;
+            //Inicializar mapa
+            if(mTypefaces==null)
+                mTypefaces = new HashMap<>();
+            //Buscar el si la fuente ya había sido preguntar
+            if (mTypefaces.containsKey(typefaceName)) {
+                typeface = mTypefaces.get(typefaceName);
+            } else
+            {
+                AssetManager assets = context.getAssets();
+                typeface = Typeface.createFromAsset(assets, typefaceName);
+                mTypefaces.put(typefaceName, typeface);
+            }
+            return typeface;
+        }
+
+    }
 }

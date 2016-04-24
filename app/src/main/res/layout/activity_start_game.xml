@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/background_pencil"
+    android:layout_height="match_parent">
 
     <Button
         android:id="@+id/activity_start_game_back_button"
@@ -11,6 +12,7 @@
         android:layout_height="@dimen/option_button"
         android:background="@drawable/back"
         android:layout_marginBottom="16dp"
+        android:visibility="gone"
         android:layout_gravity="left|top"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"/>
@@ -23,20 +25,30 @@
         android:layout_gravity="center_horizontal|center_vertical"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/playerNameText"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:textSize="@dimen/text_size_normal"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            tools:text="Jugador X"/>
+            android:background="@drawable/nombre"
+            android:layout_marginBottom="16dp">
 
-        <TextView
+            <upc.edu.pe.wedraw.components.CustomTextView
+                android:id="@+id/playerNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_normal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/name_area_margin"
+                android:layout_marginRight="@dimen/name_area_margin"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+        <upc.edu.pe.wedraw.components.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:textSize="@dimen/text_size_normal"
             android:text="@string/waiting_players"
             />
@@ -45,10 +57,7 @@
             android:layout_width="@dimen/connect_button"
             android:layout_height="@dimen/connect_button"
             android:textSize="@dimen/connect_button_text_size"
-            android:enabled="false"
-            android:background="@drawable/round_button"
-            android:text="@string/play"
-            android:backgroundTint="@color/disableButton"/>
+            android:background="@drawable/transition_play" />
 
     </LinearLayout>
 

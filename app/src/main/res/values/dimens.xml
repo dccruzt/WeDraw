@@ -14,4 +14,7 @@
     <dimen name="text_margin">8dp</dimen>
     <dimen name="connect_button">128dp</dimen>
     <dimen name="connect_button_text_size">24dp</dimen>
+
+    <dimen name="name_area_margin">36dp</dimen>
+
 </resources>
