@@ -70,11 +70,19 @@ public class StartGameActivity extends AppCompatActivity{
         });
     }
 
+    /**
+     * Método invocado cuando la TV mande una señal indicando que el juego debe comenzar
+     */
     public void startGame(){
         Intent i = new Intent(StartGameActivity.this, StartGameActivity.class);
         startActivity(i);
     }
 
+    /**
+     * Metodo invocado cuando la TV mande una señal para indicar su se puede iniciar el juego o no,
+     * y por ende activar el boton "JUGAR" o no
+     * @param value indica si se puede comenzar a jugar o no
+     */
     public void activarJugar(boolean value){
         TransitionDrawable transition = (TransitionDrawable) mStartButton.getBackground();
         if(currentStatus == value)

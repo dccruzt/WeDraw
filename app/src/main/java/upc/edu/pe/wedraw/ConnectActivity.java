@@ -76,7 +76,7 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     /**
-     * Clase que implementa se encargará de manejar la selección de uno de los items
+     * Clase que se encargará de manejar la selección de uno de los items
      * de la lista de TVs
      */
     class TVSelectedCallback implements AdapterView.OnItemClickListener{
