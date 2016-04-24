@@ -43,8 +43,8 @@ public class InputNameActivity extends Activity{
             public void onClick(View v) {
                 //Verificar nombre es menor de 20 caracteres
                 final String name = mNameEditText.getText().toString().trim();
-                /*Intent i = new Intent(InputNameActivity.this, StartGameActivity.class);
-                startActivity(i);*/
+                Intent i = new Intent(InputNameActivity.this, StartGameActivity.class);
+                startActivity(i);
                 if(Pattern.matches(NAME_REGEX, name)){
                     //Enviar el nombre al webapp
                     ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.ConnectPlayer(name), new ResponseListener<Object>() {

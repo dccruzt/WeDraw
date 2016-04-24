@@ -185,13 +185,12 @@ public class ConnectActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = mActivity.getLayoutInflater();
-            View view = inflater.inflate(R.layout.list_item_tv, null);
-
+            if(convertView==null)
+                convertView = LayoutInflater.from(ConnectActivity.this).inflate(R.layout.list_item_tv, parent, false);
             ConnectableDevice device = (ConnectableDevice) mListAdapter.getItem(position);
-            TextView tvNombreTv = (TextView) view.findViewById(R.id.item_tv);
+            TextView tvNombreTv = (TextView) convertView.findViewById(R.id.item_tv);
             tvNombreTv.setText(device.getFriendlyName());
-            return view;
+            return convertView;
         }
     }
 

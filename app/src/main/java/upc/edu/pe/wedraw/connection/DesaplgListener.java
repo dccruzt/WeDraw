@@ -1,12 +1,16 @@
 package upc.edu.pe.wedraw.connection;
 
+import com.connectsdk.core.JSONDeserializable;
 import com.connectsdk.service.sessions.WebAppSession;
 import com.connectsdk.service.sessions.WebAppSessionListener;
+
+import org.json.JSONObject;
 
 import upc.edu.pe.wedraw.ConnectActivity;
 import upc.edu.pe.wedraw.InputNameActivity;
 import upc.edu.pe.wedraw.SplashActivity;
 import upc.edu.pe.wedraw.StartGameActivity;
+import upc.edu.pe.wedraw.helpers.StringsHelper;
 
 /**
  * Created by Andres Revolledo on 4/12/16.
@@ -59,7 +63,30 @@ public class DesaplgListener implements WebAppSessionListener{
 
     @Override
     public void onReceiveMessage(WebAppSession webAppSession, Object message) {
+        try{
+            JSONObject json = new JSONObject(message.toString());
+            String accion = json.getString(StringsHelper.ACTION);
+            if(accion.equals(StringsHelper.ENABLE_START)){
+                habilitarInicio(json.getBoolean("habilitarInicio"));
+            }else if(accion.equals(StringsHelper.START_GAME)){
+                comenzarJuego();
+            }
 
+        }catch (Exception e){
+
+        }
+    }
+
+    public void habilitarInicio(boolean habilitado){
+        if(getStartGameActivity()!=null){
+            getStartGameActivity().activarJugar(habilitado);
+        }
+    }
+
+    public void comenzarJuego(){
+        if(getStartGameActivity()!=null){
+            getStartGameActivity().startGame();
+        }
     }
 
     @Override

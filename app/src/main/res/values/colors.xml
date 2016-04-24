@@ -6,4 +6,5 @@
     <color name="fillButton">#FF2020</color>
     <color name="borderButton">#040404</color>
     <color name="disableButton">#33979797</color>
+    <color name="white">#fff</color>
 </resources>

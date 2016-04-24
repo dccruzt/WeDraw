@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+    android:layout_height="@dimen/tv_picker_height">
+    <upc.edu.pe.wedraw.components.CustomTextView
         android:id="@+id/item_tv"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/text_item_height"
         android:gravity="center"
+        android:layout_centerInParent="true"
         android:textSize="@dimen/text_item_size"
         tools:text="Tv Friendly name"
         android:paddingRight="6dp"
         android:paddingLeft="6dp"
-        android:textColor="#AA4d4d" />
+        android:textColor="#ccc1b1" />
 
-</LinearLayout>
+</RelativeLayout>

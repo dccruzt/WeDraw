@@ -15,22 +15,12 @@ import org.json.JSONObject;
 public class JsonHelper {
 
     public static JSONObject ConnectTv(){
-        try {
-            JSONObject jsonObject = new JSONObject() {
-                {
-                    put(StringsHelper.ACTION, StringsHelper.CONNECT_TV);
-                }
-            };
-            return jsonObject;
-        } catch (JSONException ex) {
-            return null;
-        }
+        return getDefaultAction(StringsHelper.CONNECT_TV);
     }
 
     public static JSONObject ConnectPlayer(String player){
         try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put(StringsHelper.ACTION, StringsHelper.CONNECT_PLAYER);
+            JSONObject jsonObject = getDefaultAction(StringsHelper.CONNECT_PLAYER);
             jsonObject.put(StringsHelper.PLAYER, player);
             return jsonObject;
         } catch (Exception ex) {
@@ -38,4 +28,17 @@ public class JsonHelper {
         }
     }
 
+    public static JSONObject requestGameStart(){
+        return getDefaultAction(StringsHelper.REQUEST_START);
+    }
+
+    private static JSONObject getDefaultAction(String action){
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put(StringsHelper.ACTION, action);
+            return jsonObject;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 }

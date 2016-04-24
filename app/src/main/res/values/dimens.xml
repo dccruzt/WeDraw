@@ -6,15 +6,19 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="text_size_normal">32dp</dimen>
     <dimen name="button_text_size_normal">16dp</dimen>
-    <dimen name="input_width">200dp</dimen>
+    <dimen name="input_width">300dp</dimen>
     <dimen name="text_item_height">40dp</dimen>
-    <dimen name="text_item_size">16dp</dimen>
+    <dimen name="text_item_size">24dp</dimen>
     <dimen name="button_padding">8dp</dimen>
     <dimen name="input_text_size">16dp</dimen>
     <dimen name="text_margin">8dp</dimen>
     <dimen name="connect_button">128dp</dimen>
     <dimen name="connect_button_text_size">24dp</dimen>
 
+    <!--Seleccionar tv activity -->
+    <dimen name="tv_picker_height">60dp</dimen>
+
+    <!--StartGameActivity-->
     <dimen name="name_area_margin">36dp</dimen>
 
 </resources>

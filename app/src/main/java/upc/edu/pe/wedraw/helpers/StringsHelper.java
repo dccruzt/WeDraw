@@ -16,7 +16,13 @@ public class StringsHelper {
 
 
     //Acciones enviadas
-    public static String CONNECT_TV = "conectarTV";
-    public static String CONNECT_PLAYER = "conectarJugador";
+    public static final String CONNECT_TV = "conectarTV";
+    public static final String CONNECT_PLAYER = "conectarJugador";
+    public static final String REQUEST_START = "solicitarInicio";
+    public static final String DISCONNECT_PLAYER = "desconectarJugador";
+
+    //Acciones recibidas
+    public static final String ENABLE_START = "habilitarInicio";
+    public static final String START_GAME = "empezarJuego";
 
 }

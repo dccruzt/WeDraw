@@ -7,6 +7,12 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:text="test"
+        android:layout_height="wrap_content" />
+
+    <Button
         android:id="@+id/activity_start_game_back_button"
         android:layout_width="@dimen/option_button"
         android:layout_height="@dimen/option_button"
@@ -25,26 +31,27 @@
         android:layout_gravity="center_horizontal|center_vertical"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/nombre"
             android:layout_marginBottom="16dp">
 
             <upc.edu.pe.wedraw.components.CustomTextView
-                android:id="@+id/playerNameText"
+                android:id="@+id/txtPlayerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_normal"
-                android:layout_gravity="center"
-                android:gravity="center"
+                android:text="fasdfasdfa"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/name_area_margin"
                 android:layout_marginRight="@dimen/name_area_margin"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <upc.edu.pe.wedraw.components.CustomTextView
+            android:id="@+id/txtHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
