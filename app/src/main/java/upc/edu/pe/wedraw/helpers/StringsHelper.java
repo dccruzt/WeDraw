@@ -10,15 +10,18 @@ package upc.edu.pe.wedraw.helpers;
  * @author Andres Revolledo
  */
 public class StringsHelper {
+
+    //Parameters
     public static String ACTION = "accion";
     public static String RESULT = "resultado";
     public static String PLAYER = "jugador";
-
+    public static String DIFFICULTY = "dificultad";
 
     //Acciones enviadas
     public static final String CONNECT_TV = "conectarTV";
     public static final String CONNECT_PLAYER = "conectarJugador";
     public static final String REQUEST_START = "solicitarInicio";
+    public static final String SEND_DIFFICULTY = "enviarDificultad";
     public static final String DISCONNECT_PLAYER = "desconectarJugador";
 
     //Acciones recibidas

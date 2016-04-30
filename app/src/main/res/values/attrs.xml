@@ -4,7 +4,8 @@
 
     <declare-styleable name="FontAttributes">
         <attr name="customFont">
-            <enum name="biko" value="0"/>
+            <enum name="international" value="0"/>
+            <enum name="biko" value="1"/>
         </attr>
     </declare-styleable>
 

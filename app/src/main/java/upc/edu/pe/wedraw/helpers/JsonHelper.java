@@ -32,6 +32,44 @@ public class JsonHelper {
         return getDefaultAction(StringsHelper.REQUEST_START);
     }
 
+    //<editor-fold desc="To send difficulty selected by user">
+
+    /**
+     * Enum que contiene las dificultades actualmente soportadas, y su
+     * respectivo id que será pasado al servicio
+     */
+    public enum Difficulties{
+        EASY("facil"),MEDIUM("intermedio"),HARD("avanzado");
+        private String mId;
+        Difficulties(String id){
+            id = mId;
+        }
+        public String getId(){
+            return mId;
+        }
+    }
+
+    /**
+     * Crea el mensaje JSON a ser invocado al ejecutar la acción de selección de dificultad
+     * @param difficulty enum con la dificultad seleccionada
+     * @return JSONObject a ser mandado para ejecutar la acción de selección de dificultad
+     */
+    public static JSONObject selectGameDifficulty(Difficulties difficulty){
+        JSONObject action= getDefaultAction(StringsHelper.SEND_DIFFICULTY);
+        try {
+            action.put(StringsHelper.DIFFICULTY,difficulty.getId());
+        } catch (JSONException e) {}
+        return action;
+    }
+
+    //</editor-fold>
+
+    /**
+     * Para obtener un object básico conteniendo la acción especificada.
+     * Luego podría añadirsele más parámetros al JSONObject si se desea.
+     * @param action acción que se le mandará al servidor
+     * @return JSONObject cuyo único parámetro es la acción que se pasó en el parámetro
+     */
     private static JSONObject getDefaultAction(String action){
         try {
             JSONObject jsonObject = new JSONObject();

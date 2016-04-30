@@ -36,7 +36,7 @@ import upc.edu.pe.wedraw.helpers.JsonHelper;
  */
 public class ConnectActivity extends AppCompatActivity {
 
-    static final String WEBAPP = "wedraw";
+    static final String WEBAPP = "desaplg";
     ListView mTvListView;
     private TvAdapter mAdapter;
 

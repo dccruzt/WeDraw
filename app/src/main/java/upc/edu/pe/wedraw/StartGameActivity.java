@@ -56,7 +56,11 @@ public class StartGameActivity extends AppCompatActivity{
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.requestGameStart(), new ResponseListener<Object>() {
+                if(currentStatus) {
+                    Intent i = new Intent(StartGameActivity.this, DifficultyActivity.class);
+                    startActivity(i);
+                }
+                /*ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.requestGameStart(), new ResponseListener<Object>() {
                     @Override
                     public void onSuccess(Object object) {
                         startGame();//TODO: comment this out
@@ -65,7 +69,7 @@ public class StartGameActivity extends AppCompatActivity{
                     public void onError(ServiceCommandError error) {
 
                     }
-                });
+                });*/
             }
         });
     }

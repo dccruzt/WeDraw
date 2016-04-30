@@ -30,8 +30,7 @@ public class FontHelper {
         Typeface typeface = null;
         if (array != null)
         {
-            final int font = array.getInt(
-                    R.styleable.FontAttributes_customFont,0);
+            final int font = array.getInt(R.styleable.FontAttributes_customFont,0);
            typeface = Fonts.get(context,font);
             array.recycle();
         }
@@ -45,7 +44,8 @@ public class FontHelper {
      * Fuentes que soportará nuestra aplicación
      */
     private enum Fonts{
-        BIKO("Biko_Regular.otf"); //TODO: setear la fuente correcta
+        BIKO("Biko_Regular.otf"),
+        INTERNATIONAL("international_playboy.ttf");
         private String mFont;
         Fonts(String font){
             mFont = font;
