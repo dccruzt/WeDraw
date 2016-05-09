@@ -24,19 +24,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ConnectActivity"
-            android:screenOrientation="landscape"></activity>
+        <activity android:name=".ConnectActivity" />
         <activity
             android:name=".InputNameActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".StartGameActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".DifficultyActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".DrawActivity"
+            android:screenOrientation="sensorLandscape"></activity>
     </application>
 
 </manifest>

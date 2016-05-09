@@ -40,7 +40,8 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this, ConnectActivity.class);
+                //Intent i = new Intent(SplashActivity.this, ConnectActivity.class);
+                Intent i = new Intent(SplashActivity.this, DrawActivity.class);
                 SplashActivity.this.startActivity(i);
                 SplashActivity.this.finish();
             }
