@@ -10,6 +10,14 @@ import com.connectsdk.discovery.DiscoveryManager;
 import upc.edu.pe.wedraw.connection.DesaplgListener;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 
+/*
+ * Actividad Splash, se encarga de inicializar el contexto y el listener de la aplicacion
+ * ademas de iniciar el DiscoveryManager para iniciar la busqueda de TVs en la red.
+ *
+ * @author Daniela Cruz
+ * @author Victor Vasquez
+ * @author Andres Revolledo
+ */
 public class SplashActivity extends Activity {
 
     private final int SPLASH_DISPLAY_TIME = 5000;
@@ -17,7 +25,7 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_splash);
+        setContentView(R.layout.activity_splash);
 
         ConnectionHelper.sContext = getApplicationContext();
         ConnectionHelper.sDesaplgListener = new DesaplgListener();
@@ -29,6 +37,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 Intent i = new Intent(SplashActivity.this, ConnectActivity.class);
+                //Intent i = new Intent(SplashActivity.this, DrawActivity.class);
                 SplashActivity.this.startActivity(i);
                 SplashActivity.this.finish();
             }

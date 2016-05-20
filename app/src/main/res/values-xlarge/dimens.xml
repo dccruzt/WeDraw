@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="splash_logo_size">150dp</dimen>
+    <dimen name="logo_ancho">700dp</dimen>
+    <dimen name="logo_alto">308dp</dimen>
+
+    <dimen name="logo_size_normal">200dp</dimen>
+    <dimen name="logo_size_small">160dp</dimen>
+    <dimen name="option_button">80dp</dimen>
+    <dimen name="text_size_normal">64dp</dimen>
+    <dimen name="button_text_size_normal">32dp</dimen>
+    <dimen name="input_width">600dp</dimen>
+    <dimen name="text_item_height">60dp</dimen>
+    <dimen name="text_item_size">32dp</dimen>
+    <dimen name="button_padding">32dp</dimen>
+    <dimen name="text_margin">24dp</dimen>
+    <dimen name="connect_button">256dp</dimen>
+    <dimen name="connect_button_text_size">48dp</dimen>
 </resources>

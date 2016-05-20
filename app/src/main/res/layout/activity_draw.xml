@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@drawable/connect_background"
+    android:orientation="vertical"
+    tools:context="upc.edu.pe.wedraw.DrawActivity">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llaColors"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+                
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonBlack"
+                style="@style/ColorOptionStyle"
+                android:background="@drawable/paint_negro"/>
+            <Button
+                android:id="@+id/buttonRed"
+                style="@style/ColorOptionStyle"
+                android:background="@drawable/paint_rojo"/>
+            <Button
+                android:id="@+id/buttonYellow"
+                style="@style/ColorOptionStyle"
+                android:background="@drawable/paint_amarillo"/>
+            <Button
+                android:id="@+id/buttonGreen"
+                style="@style/ColorOptionStyle"
+                android:background="@drawable/paint_verde"/>
+            <Button
+                android:id="@+id/buttonBlue"
+                style="@style/ColorOptionStyle"
+                android:background="@drawable/paint_negro"/>
+
+            <Button
+                android:id="@+id/buttonErase"
+                android:layout_width="54dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/borrador"/>
+            
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/llaColors">
+            <RelativeLayout
+                android:id="@+id/llaHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/base_name_height"
+                android:background="@drawable/nombre">
+                <upc.edu.pe.wedraw.components.CustomTextView
+                    android:id="@+id/txtPlayerName"
+                    style="@style/NameTextViewStyle"
+                    android:text="Test"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/llaFooter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/base_name_height"
+                android:background="@drawable/palabra"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp">
+                <upc.edu.pe.wedraw.components.CustomTextView
+                    android:id="@+id/txtWord"
+                    style="@style/NameTextViewStyle"
+                    android:text="Test"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/llaHeader"
+                android:layout_above="@+id/llaFooter"
+                android:background="@drawable/pizarra">
+                <upc.edu.pe.wedraw.components.DrawingView
+                    android:id="@+id/drawingView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@drawable/connect_background">
+
+<ImageView
+    android:layout_width="@dimen/logo_ancho"
+    android:layout_height="@dimen/logo_alto"
+    android:layout_margin="12dp"
+    android:src="@drawable/logo"
+    android:layout_gravity="center_horizontal"
+/>
+
+<upc.edu.pe.wedraw.components.CustomTextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:textAppearance ="?android:attr/textAppearanceLarge"
+    android:text="@string/select_tv"
+    android:textSize="@dimen/text_size_normal"
+    android:layout_gravity="center_horizontal"/>
+
+<ListView
+    android:id="@+id/activity_connect_tv_list"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="32dp"
+    android:layout_marginRight="32dp"
+    android:background="@drawable/background_tv_picker"
+    android:layout_height="@dimen/tv_picker_height"/>
+
+</LinearLayout>
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FontAttributes">
+        <attr name="customFont">
+            <enum name="INTERNATIONAL" value="0"/>
+            <enum name="BIKO" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

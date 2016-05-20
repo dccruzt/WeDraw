@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/splash"
-        android:layout_width="@dimen/splash_logo_size"
-        android:layout_height="@dimen/splash_logo_size"
+        android:layout_width="@dimen/logo_size_normal"
+        android:layout_height="@dimen/logo_size_normal"
         android:layout_gravity="center"
         android:src="@drawable/logo_upc" />
 </LinearLayout>
