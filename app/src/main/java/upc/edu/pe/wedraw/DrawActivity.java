@@ -13,12 +13,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.connectsdk.service.capability.listeners.ResponseListener;
+import com.connectsdk.service.command.ServiceCommandError;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import upc.edu.pe.wedraw.components.DrawingView;
+import upc.edu.pe.wedraw.helpers.ConnectionHelper;
+import upc.edu.pe.wedraw.helpers.JsonHelper;
 
 public class DrawActivity extends AppCompatActivity implements SensorEventListener{
 
@@ -30,6 +35,7 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
 
+        ConnectionHelper.sDesaplgListener.setDrawActivity(this);
         drawingView = (DrawingView) findViewById(R.id.drawingView);
 
         //Setup bus to detect shake
@@ -37,6 +43,21 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void colorClicked(View v) {
+
+
+        ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.test(), new ResponseListener<Object>() {
+
+            @Override
+            public void onError(ServiceCommandError error) {
+
+            }
+
+            @Override
+            public void onSuccess(Object object) {
+
+            }
+        });
+
         int colorId;
         switch (v.getId()){
             case R.id.buttonBlack:  colorId = R.color.paint_black;  break;
@@ -107,6 +128,18 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
                     if((countPos>=2 && countNeg>1) || (countPos>=1 && countNeg>2)){
                         countPos = countNeg = 0;
                         ((DrawingView) findViewById(R.id.drawingView)).clearDrawing();
+
+                        ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.requestGameStart(), new ResponseListener<Object>() {
+
+                            @Override
+                            public void onError(ServiceCommandError error) {
+
+                            }
+                            @Override
+                            public void onSuccess(Object object) {
+
+                            }
+                        });
                     }
                 }
             }

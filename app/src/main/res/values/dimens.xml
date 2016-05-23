@@ -1,4 +1,7 @@
 <resources>
+    <dimen name="logo_ancho">500dp</dimen>
+    <dimen name="logo_alto">201dp</dimen>
+
     <dimen name="logo_size_normal">100dp</dimen>
     <dimen name="logo_size_small">80dp</dimen>
     <dimen name="option_button">40dp</dimen>

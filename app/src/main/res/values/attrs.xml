@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
     <declare-styleable name="FontAttributes">
         <attr name="customFont">
-            <enum name="international" value="0"/>
-            <enum name="biko" value="1"/>
-            <enum name="chalk" value="2"/>
+            <enum name="INTERNATIONAL" value="0"/>
+            <enum name="BIKO" value="1"/>
+            <enum name="CHALK" value="2"/>
         </attr>
     </declare-styleable>
-
 </resources>

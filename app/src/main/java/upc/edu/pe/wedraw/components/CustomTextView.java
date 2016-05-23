@@ -1,6 +1,7 @@
 package upc.edu.pe.wedraw.components;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -26,7 +27,8 @@ public class CustomTextView extends TextView implements Typefaceable {
 
     public CustomTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context,attrs);
+        this.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/international_playboy.ttf"));
+        //init(context,attrs);
     }
 
     /**

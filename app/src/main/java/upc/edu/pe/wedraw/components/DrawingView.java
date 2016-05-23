@@ -8,8 +8,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.connectsdk.service.capability.listeners.ResponseListener;
+import com.connectsdk.service.command.ServiceCommandError;
+
+import upc.edu.pe.wedraw.helpers.ConnectionHelper;
+import upc.edu.pe.wedraw.helpers.JsonHelper;
 
 public class DrawingView extends View {
 
@@ -124,6 +131,20 @@ public class DrawingView extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 touch_move(x, y);
+
+                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(Math.round(x),Math.round(y)), new ResponseListener<Object>() {
+
+                    @Override
+                    public void onError(ServiceCommandError error) {
+                        Log.e("error", "");
+                    }
+
+                    @Override
+                    public void onSuccess(Object object) {
+                        Log.e("exito", "");
+                    }
+                });
+
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:

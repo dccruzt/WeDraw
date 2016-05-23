@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="logo_ancho">700dp</dimen>
+    <dimen name="logo_alto">308dp</dimen>
+
     <dimen name="logo_size_normal">150dp</dimen>
     <dimen name="logo_size_small">120dp</dimen>
     <dimen name="option_button">60dp</dimen>

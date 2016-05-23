@@ -15,12 +15,12 @@ import org.json.JSONObject;
 public class JsonHelper {
 
     public static JSONObject ConnectTv(){
-        return getDefaultAction(StringsHelper.CONNECT_TV);
+        return getDefaultAction(StringsHelper.CONNECT_TV, null);
     }
 
     public static JSONObject ConnectPlayer(String player){
         try {
-            JSONObject jsonObject = getDefaultAction(StringsHelper.CONNECT_PLAYER);
+            JSONObject jsonObject = getDefaultAction(StringsHelper.CONNECT_PLAYER, null);
             jsonObject.put(StringsHelper.PLAYER, player);
             return jsonObject;
         } catch (Exception ex) {
@@ -29,7 +29,24 @@ public class JsonHelper {
     }
 
     public static JSONObject requestGameStart(){
-        return getDefaultAction(StringsHelper.REQUEST_START);
+        return getDefaultAction(StringsHelper.REQUEST_START, null);
+    }
+
+    public static JSONObject test(){
+        return getDefaultAction("test", null);
+    }
+
+    public static JSONObject makeDraw(int x, int y){
+        try {
+            JSONObject jsonResult = new JSONObject();
+            jsonResult.put("x", x);
+            jsonResult.put("y", y);
+
+            JSONObject jsonObject = getDefaultAction(StringsHelper.MAKE_DRAW, jsonResult);
+            return jsonObject;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
 
@@ -58,7 +75,7 @@ public class JsonHelper {
      * @return JSONObject a ser mandado para ejecutar la acción de selección de dificultad
      */
     public static JSONObject selectGameDifficulty(Difficulties difficulty){
-        JSONObject action= getDefaultAction(StringsHelper.SEND_DIFFICULTY);
+        JSONObject action= getDefaultAction(StringsHelper.SEND_DIFFICULTY, null);
         try {
             action.put(StringsHelper.DIFFICULTY,difficulty.getId());
         } catch (JSONException e) {}
@@ -83,10 +100,11 @@ public class JsonHelper {
      * @param action acción que se le mandará al servidor
      * @return JSONObject cuyo único parámetro es la acción que se pasó en el parámetro
      */
-    private static JSONObject getDefaultAction(String action){
+    private static JSONObject getDefaultAction(String action, JSONObject result){
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(StringsHelper.ACTION, action);
+            jsonObject.put(StringsHelper.RESULT, result);
             return jsonObject;
         } catch (Exception ex) {
             return null;

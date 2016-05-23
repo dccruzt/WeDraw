@@ -1,13 +1,8 @@
 package upc.edu.pe.wedraw;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,15 +14,12 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.connectsdk.device.ConnectableDevice;
 import com.connectsdk.device.DevicePicker;
 import com.connectsdk.service.WebOSTVService;
 import com.connectsdk.service.capability.listeners.ResponseListener;
 import com.connectsdk.service.command.ServiceCommandError;
 import com.connectsdk.service.sessions.WebAppSession;
-
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 import upc.edu.pe.wedraw.helpers.JsonHelper;
 
@@ -122,7 +114,8 @@ public class ConnectActivity extends AppCompatActivity {
 
                     }
                 });
-                Intent i = new Intent(ConnectActivity.this, InputNameActivity.class);
+                Intent i = new Intent(ConnectActivity.this, DrawActivity.class);
+                //Intent i = new Intent(ConnectActivity.this, InputNameActivity.class);
                 startActivity(i);
 
             } catch (Exception ex) {

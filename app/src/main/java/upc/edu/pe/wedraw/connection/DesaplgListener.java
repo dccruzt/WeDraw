@@ -16,6 +16,7 @@ import java.util.List;
 
 import upc.edu.pe.wedraw.ConnectActivity;
 import upc.edu.pe.wedraw.GuessActivity;
+import upc.edu.pe.wedraw.DrawActivity;
 import upc.edu.pe.wedraw.InputNameActivity;
 import upc.edu.pe.wedraw.SplashActivity;
 import upc.edu.pe.wedraw.StartGameActivity;
@@ -41,6 +42,7 @@ public class DesaplgListener implements WebAppSessionListener{
     private InputNameActivity mInputNameActivity;
     private StartGameActivity mStartGameActivity;
     private GuessActivity mGuessActivity;
+    private DrawActivity mDrawActivity;
 
     public SplashActivity getSplashActivity() {
         return mSplashActivity;
@@ -83,6 +85,15 @@ public class DesaplgListener implements WebAppSessionListener{
     }
 
     //</editor-fold>
+
+
+    public DrawActivity getDrawActivity() {
+        return mDrawActivity;
+    }
+
+    public void setDrawActivity(DrawActivity drawActivity) {
+        mDrawActivity = drawActivity;
+    }
 
     @Override
     public void onReceiveMessage(WebAppSession webAppSession, Object message) {

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="logo_ancho">700dp</dimen>
+    <dimen name="logo_alto">308dp</dimen>
+
     <dimen name="logo_size_normal">200dp</dimen>
-    8<dimen name="logo_size_small">160dp</dimen>
+    <dimen name="logo_size_small">160dp</dimen>
     <dimen name="option_button">80dp</dimen>
     <dimen name="text_size_normal">64dp</dimen>
     <dimen name="button_text_size_normal">32dp</dimen>

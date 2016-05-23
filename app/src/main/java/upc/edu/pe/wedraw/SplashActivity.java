@@ -3,13 +3,9 @@ package upc.edu.pe.wedraw;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.connectsdk.discovery.DiscoveryManager;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import upc.edu.pe.wedraw.connection.DesaplgListener;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
@@ -41,6 +37,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 Intent i = new Intent(SplashActivity.this, ConnectActivity.class);
+                //Intent i = new Intent(SplashActivity.this, DrawActivity.class);
                 SplashActivity.this.startActivity(i);
                 SplashActivity.this.finish();
             }

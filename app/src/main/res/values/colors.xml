@@ -9,9 +9,9 @@
     <color name="white">#fff</color>
 
     <color name="paint_black">#000</color>
-    <color name="paint_red">#f00</color>
-    <color name="paint_yellow">#ff0</color>
-    <color name="paint_green">#0f0</color>
-    <color name="paint_blue">#00f</color>
+    <color name="paint_red">#C13836</color>
+    <color name="paint_yellow">#DAB42C</color>
+    <color name="paint_green">#00973F</color>
+    <color name="paint_blue">#006999</color>
 
 </resources>
