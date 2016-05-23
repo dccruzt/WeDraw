@@ -18,10 +18,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import de.halfbit.tinybus.Bus;
-import de.halfbit.tinybus.Subscribe;
-import de.halfbit.tinybus.TinyBus;
-import de.halfbit.tinybus.wires.ShakeEventWire;
 import upc.edu.pe.wedraw.components.DrawingView;
 
 public class DrawActivity extends AppCompatActivity implements SensorEventListener{

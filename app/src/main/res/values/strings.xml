@@ -11,6 +11,7 @@
 
     <!-- Difficulty picker activity -->
     <string name="hint_difficulty">SELECCIONA EL NIVEL DE DIFICULTAD DE LA PALABRA A DIBUJAR</string>
+    <string name="title_activity_guess">GuessActivity</string>
 
 
 </resources>

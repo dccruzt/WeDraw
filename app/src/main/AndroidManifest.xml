@@ -35,8 +35,13 @@
             android:name=".DifficultyActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" />
-        <activity android:name=".DrawActivity"
-            android:screenOrientation="sensorLandscape"></activity>
+        <activity
+            android:name=".DrawActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".GuessActivity"
+            android:label="@string/title_activity_guess"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

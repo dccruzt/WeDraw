@@ -16,16 +16,19 @@ public class StringsHelper {
     public static String RESULT = "resultado";
     public static String PLAYER = "jugador";
     public static String DIFFICULTY = "dificultad";
+    public static String WORD = "palabra";
 
     //Acciones enviadas
     public static final String CONNECT_TV = "conectarTV";
     public static final String CONNECT_PLAYER = "conectarJugador";
     public static final String REQUEST_START = "solicitarInicio";
     public static final String SEND_DIFFICULTY = "enviarDificultad";
+    public static final String GUESS_WORD = "adivinarPalabra";
     public static final String DISCONNECT_PLAYER = "desconectarJugador";
 
     //Acciones recibidas
     public static final String ENABLE_START = "habilitarInicio";
     public static final String START_GAME = "empezarJuego";
+    public static final String GET_HINT = "enviarPista";
 
 }

@@ -32,7 +32,10 @@ public class JsonHelper {
         return getDefaultAction(StringsHelper.REQUEST_START);
     }
 
-    //<editor-fold desc="To send difficulty selected by user">
+
+
+
+    //<editor-fold desc="Para enviar la dificultad escogida por el usuario">
 
     /**
      * Enum que contiene las dificultades actualmente soportadas, y su
@@ -64,6 +67,16 @@ public class JsonHelper {
 
     //</editor-fold>
 
+    public static JSONObject guessWord(String word){
+        JSONObject action= getDefaultAction(StringsHelper.GUESS_WORD);
+        try {
+            action.put(StringsHelper.WORD,word);
+        } catch (JSONException e) {}
+        return action;
+    }
+
+
+
     /**
      * Para obtener un object básico conteniendo la acción especificada.
      * Luego podría añadirsele más parámetros al JSONObject si se desea.
@@ -79,4 +92,8 @@ public class JsonHelper {
             return null;
         }
     }
+
+
+
+
 }

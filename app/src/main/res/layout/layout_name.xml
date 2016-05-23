@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/base_name_height"
+    android:background="@drawable/nombre"
+    android:layout_margin="16dp">
+
+    <upc.edu.pe.wedraw.components.CustomTextView
+        android:id="@+id/txtPlayerName"
+        style="@style/NameTextViewStyle"
+        android:layout_height="wrap_content"
+        />
+
+</RelativeLayout>

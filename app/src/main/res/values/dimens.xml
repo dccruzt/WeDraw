@@ -36,4 +36,7 @@
     <!-- Draw image activity -->
     <dimen name="color_picker_size">40dp</dimen>
 
+    <!-- Guess activity -->
+    <dimen name="guess_edit_top_margin">12dp</dimen>
+
 </resources>

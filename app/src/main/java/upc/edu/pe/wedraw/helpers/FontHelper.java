@@ -44,8 +44,9 @@ public class FontHelper {
      * Fuentes que soportará nuestra aplicación
      */
     private enum Fonts{
+        INTERNATIONAL("international_playboy.ttf"),
         BIKO("Biko_Regular.otf"),
-        INTERNATIONAL("international_playboy.ttf");
+        CHALK("VTCAllSkratchedUpOne.ttf");
         private String mFont;
         Fonts(String font){
             mFont = font;
@@ -68,7 +69,7 @@ public class FontHelper {
             //Inicializar mapa
             if(mTypefaces==null)
                 mTypefaces = new HashMap<>();
-            //Buscar el si la fuente ya había sido preguntar
+            //Buscar si la fuente ya había sido preguntar
             if (mTypefaces.containsKey(typefaceName)) {
                 typeface = mTypefaces.get(typefaceName);
             } else

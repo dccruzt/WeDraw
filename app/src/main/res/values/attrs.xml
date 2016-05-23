@@ -6,6 +6,7 @@
         <attr name="customFont">
             <enum name="international" value="0"/>
             <enum name="biko" value="1"/>
+            <enum name="chalk" value="2"/>
         </attr>
     </declare-styleable>
 

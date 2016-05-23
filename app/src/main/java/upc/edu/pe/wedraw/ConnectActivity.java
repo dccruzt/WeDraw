@@ -28,10 +28,6 @@ import com.connectsdk.service.capability.listeners.ResponseListener;
 import com.connectsdk.service.command.ServiceCommandError;
 import com.connectsdk.service.sessions.WebAppSession;
 
-import de.halfbit.tinybus.Bus;
-import de.halfbit.tinybus.Subscribe;
-import de.halfbit.tinybus.TinyBus;
-import de.halfbit.tinybus.wires.ShakeEventWire;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 import upc.edu.pe.wedraw.helpers.JsonHelper;
 

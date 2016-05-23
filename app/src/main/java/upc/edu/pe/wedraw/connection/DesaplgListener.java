@@ -1,12 +1,21 @@
 package upc.edu.pe.wedraw.connection;
 
+import android.content.Intent;
+
 import com.connectsdk.core.JSONDeserializable;
 import com.connectsdk.service.sessions.WebAppSession;
 import com.connectsdk.service.sessions.WebAppSessionListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import upc.edu.pe.wedraw.ConnectActivity;
+import upc.edu.pe.wedraw.GuessActivity;
 import upc.edu.pe.wedraw.InputNameActivity;
 import upc.edu.pe.wedraw.SplashActivity;
 import upc.edu.pe.wedraw.StartGameActivity;
@@ -24,10 +33,14 @@ import upc.edu.pe.wedraw.helpers.StringsHelper;
  */
 public class DesaplgListener implements WebAppSessionListener{
 
+
+    //<editor-fold desc="Se guardan las activites para luego poder invocar sus métodos">
+
     private SplashActivity mSplashActivity;
     private ConnectActivity mConnectActivity;
     private InputNameActivity mInputNameActivity;
     private StartGameActivity mStartGameActivity;
+    private GuessActivity mGuessActivity;
 
     public SplashActivity getSplashActivity() {
         return mSplashActivity;
@@ -61,6 +74,16 @@ public class DesaplgListener implements WebAppSessionListener{
         mStartGameActivity = startGameActivity;
     }
 
+    public GuessActivity getGuessActivity() {
+        return mGuessActivity;
+    }
+
+    public void setGuessActivity(GuessActivity guessActivity) {
+        mGuessActivity = guessActivity;
+    }
+
+    //</editor-fold>
+
     @Override
     public void onReceiveMessage(WebAppSession webAppSession, Object message) {
         try{
@@ -70,6 +93,8 @@ public class DesaplgListener implements WebAppSessionListener{
                 habilitarInicio(json.getBoolean("habilitarInicio"));
             }else if(accion.equals(StringsHelper.START_GAME)){
                 comenzarJuego();
+            }else if(accion.equals(StringsHelper.GET_HINT)){
+                parsearPalabra(json);
             }
 
         }catch (Exception e){
@@ -88,6 +113,30 @@ public class DesaplgListener implements WebAppSessionListener{
             getStartGameActivity().startGame();
         }
     }
+
+    public void parsearPalabra(JSONObject response) throws JSONException{
+        if(getGuessActivity()==null)
+            return;
+        if(getStartGameActivity()!=null){
+            Intent i = new Intent(getStartGameActivity(),GuessActivity.class);
+            i.putExtra(GuessActivity.PARAM_HINT,response.getString("pista"));
+            getStartGameActivity().startActivity(i);
+        }
+        /*JSONArray hint = response.getJSONArray("pista");
+        List<String> listOfCharacters = new ArrayList<>();
+        for(int i=0;i<hint.length();i++){
+            String value = (String) hint.get(0);
+            listOfCharacters.add(value);
+        }
+        String[] arr = listOfCharacters.toArray(new String[listOfCharacters.size()]);
+        if(getStartGameActivity()!=null){
+            Intent i = new Intent(getStartGameActivity(),GuessActivity.class);
+            i.putExtra(GuessActivity.PARAM_HINT,arr);
+            getStartGameActivity().startActivity(i);
+        }*/
+
+    }
+
 
     @Override
     public void onWebAppSessionDisconnect(WebAppSession webAppSession) {
