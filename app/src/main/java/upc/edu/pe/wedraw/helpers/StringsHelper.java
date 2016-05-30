@@ -28,6 +28,7 @@ public class StringsHelper {
     public static final String DISCONNECT_PLAYER = "desconectarJugador";
 
     //Acciones recibidas
+    public static final String LOAD_INPUT = "cargarInicio";
     public static final String ENABLE_START = "habilitarInicio";
     public static final String TU_DIBUJAS = "tuDibujas";
     public static final String TU_ADIVINAS = "tuAdivinas";

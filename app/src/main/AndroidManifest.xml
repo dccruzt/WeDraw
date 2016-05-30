@@ -28,6 +28,11 @@
             android:name=".ConnectActivity"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".LoadingActivity"
+            android:screenOrientation="landscape">
+        </activity>
+
+        <activity
             android:name=".InputNameActivity"
             android:screenOrientation="landscape" />
         <activity

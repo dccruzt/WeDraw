@@ -21,6 +21,7 @@ import upc.edu.pe.wedraw.DifficultyActivity;
 import upc.edu.pe.wedraw.GuessActivity;
 import upc.edu.pe.wedraw.DrawActivity;
 import upc.edu.pe.wedraw.InputNameActivity;
+import upc.edu.pe.wedraw.LoadingActivity;
 import upc.edu.pe.wedraw.SplashActivity;
 import upc.edu.pe.wedraw.StartGameActivity;
 import upc.edu.pe.wedraw.TurnHintActivity;
@@ -44,6 +45,7 @@ public class DesaplgListener implements WebAppSessionListener{
 
     private SplashActivity mSplashActivity;
     private ConnectActivity mConnectActivity;
+    private LoadingActivity mLoadingActivity;
     private InputNameActivity mInputNameActivity;
     private StartGameActivity mStartGameActivity;
     private DifficultyActivity mDifficultyActivity;
@@ -65,6 +67,14 @@ public class DesaplgListener implements WebAppSessionListener{
 
     public void setConnectActivity(ConnectActivity connectActivity) {
         mConnectActivity = connectActivity;
+    }
+
+    public LoadingActivity getLoadingActivity() {
+        return mLoadingActivity;
+    }
+
+    public void setLoadingActivity(LoadingActivity loadingActivity) {
+        mLoadingActivity = loadingActivity;
     }
 
     public InputNameActivity getInputNameActivity() {
@@ -133,6 +143,8 @@ public class DesaplgListener implements WebAppSessionListener{
                 comenzarJuego();
             }else if(accion.equals(StringsHelper.UPDATE_HINT)){
                 actualizarPista(json);
+            }else if(accion.equals(StringsHelper.LOAD_INPUT)){
+                cargarInputNameActivity();
             }
 
         }catch (Exception e){
@@ -164,6 +176,14 @@ public class DesaplgListener implements WebAppSessionListener{
         getGuessActivity().actualizarPista();
     }
 
+    public void cargarInputNameActivity(){
+
+        if(mLoadingActivity != null) {
+            Intent i = new Intent(mLoadingActivity, InputNameActivity.class);
+            mLoadingActivity.startActivity(i);
+            mLoadingActivity.finish();
+        }
+    }
 
     @Override
     public void onWebAppSessionDisconnect(WebAppSession webAppSession) {

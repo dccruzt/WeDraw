@@ -34,7 +34,7 @@ import upc.edu.pe.wedraw.helpers.JsonHelper;
  */
 public class ConnectActivity extends AppCompatActivity {
 
-    static final String WEBAPP = "desaplg";
+    static final String WEBAPP = "246C6850";
     ListView mTvListView;
     private TvAdapter mAdapter;
 
@@ -114,9 +114,9 @@ public class ConnectActivity extends AppCompatActivity {
 
                     }
                 });
-                Intent i = new Intent(ConnectActivity.this, DrawActivity.class);
-                //Intent i = new Intent(ConnectActivity.this, InputNameActivity.class);
+                Intent i = new Intent(ConnectActivity.this, LoadingActivity.class);
                 startActivity(i);
+                finish();
 
             } catch (Exception ex) {
                 new AlertDialog.Builder(ConnectActivity.this)
