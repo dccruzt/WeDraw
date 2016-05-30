@@ -60,16 +60,7 @@ public class StartGameActivity extends AppCompatActivity{
                     Intent i = new Intent(StartGameActivity.this, DifficultyActivity.class);
                     startActivity(i);
                 }
-                /*ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.requestGameStart(), new ResponseListener<Object>() {
-                    @Override
-                    public void onSuccess(Object object) {
-                        startGame();//TODO: comment this out
-                    }
-                    @Override
-                    public void onError(ServiceCommandError error) {
-
-                    }
-                });*/
+                /*ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.requestGameStart(), null);*/
             }
         });
     }
@@ -78,8 +69,7 @@ public class StartGameActivity extends AppCompatActivity{
      * Método invocado cuando la TV mande una señal indicando que el juego debe comenzar
      */
     public void startGame(){
-        Intent i = new Intent(StartGameActivity.this, StartGameActivity.class);
-        startActivity(i);
+        finish();
     }
 
     /**

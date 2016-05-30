@@ -1,5 +1,6 @@
 package upc.edu.pe.wedraw.connection;
 
+import android.app.Activity;
 import android.content.Intent;
 
 import com.connectsdk.core.JSONDeserializable;
@@ -15,11 +16,15 @@ import java.util.Collections;
 import java.util.List;
 
 import upc.edu.pe.wedraw.ConnectActivity;
+import upc.edu.pe.wedraw.CountdownActivity;
+import upc.edu.pe.wedraw.DifficultyActivity;
 import upc.edu.pe.wedraw.GuessActivity;
 import upc.edu.pe.wedraw.DrawActivity;
 import upc.edu.pe.wedraw.InputNameActivity;
 import upc.edu.pe.wedraw.SplashActivity;
 import upc.edu.pe.wedraw.StartGameActivity;
+import upc.edu.pe.wedraw.TurnHintActivity;
+import upc.edu.pe.wedraw.helpers.StatusHelper;
 import upc.edu.pe.wedraw.helpers.StringsHelper;
 
 /**
@@ -41,8 +46,10 @@ public class DesaplgListener implements WebAppSessionListener{
     private ConnectActivity mConnectActivity;
     private InputNameActivity mInputNameActivity;
     private StartGameActivity mStartGameActivity;
+    private DifficultyActivity mDifficultyActivity;
     private GuessActivity mGuessActivity;
     private DrawActivity mDrawActivity;
+    private TurnHintActivity mTurnHintActivity;
 
     public SplashActivity getSplashActivity() {
         return mSplashActivity;
@@ -76,6 +83,15 @@ public class DesaplgListener implements WebAppSessionListener{
         mStartGameActivity = startGameActivity;
     }
 
+
+    public DifficultyActivity getDifficultyActivity() {
+        return mDifficultyActivity;
+    }
+
+    public void setDifficultyActivity(DifficultyActivity difficultyActivity) {
+        mDifficultyActivity = difficultyActivity;
+    }
+
     public GuessActivity getGuessActivity() {
         return mGuessActivity;
     }
@@ -84,6 +100,13 @@ public class DesaplgListener implements WebAppSessionListener{
         mGuessActivity = guessActivity;
     }
 
+    public TurnHintActivity getTurnHintActivity() {
+        return mTurnHintActivity;
+    }
+
+    public void setTurnHintActivity(TurnHintActivity turnHintActivity) {
+        mTurnHintActivity = turnHintActivity;
+    }
     //</editor-fold>
 
 
@@ -102,10 +125,14 @@ public class DesaplgListener implements WebAppSessionListener{
             String accion = json.getString(StringsHelper.ACTION);
             if(accion.equals(StringsHelper.ENABLE_START)){
                 habilitarInicio(json.getBoolean("habilitarInicio"));
+            }else if(accion.equals(StringsHelper.TU_DIBUJAS)){
+                TurnHintActivity.startActivity(getStartGameActivity(),true);
+            }else if(accion.equals(StringsHelper.TU_ADIVINAS)){
+                TurnHintActivity.startActivity(getStartGameActivity(),false);
             }else if(accion.equals(StringsHelper.START_GAME)){
                 comenzarJuego();
-            }else if(accion.equals(StringsHelper.GET_HINT)){
-                parsearPalabra(json);
+            }else if(accion.equals(StringsHelper.UPDATE_HINT)){
+                actualizarPista(json);
             }
 
         }catch (Exception e){
@@ -119,33 +146,22 @@ public class DesaplgListener implements WebAppSessionListener{
         }
     }
 
+    /**
+     * Método ue redirigirá a la vista de conteo regresivo para el comienzo del juego
+     */
     public void comenzarJuego(){
-        if(getStartGameActivity()!=null){
-            getStartGameActivity().startGame();
-        }
+        Activity activity = StatusHelper.isMyTurnToDraw ? getDifficultyActivity() : getTurnHintActivity();
+        if(activity==null) return;
+        Intent i = new Intent(activity, CountdownActivity.class);
+        activity.startActivity(i);
     }
 
-    public void parsearPalabra(JSONObject response) throws JSONException{
+    public void actualizarPista(JSONObject response) throws JSONException{
+        String pista = response.getString("pista");
+        StatusHelper.currentHint = pista;
         if(getGuessActivity()==null)
             return;
-        if(getStartGameActivity()!=null){
-            Intent i = new Intent(getStartGameActivity(),GuessActivity.class);
-            i.putExtra(GuessActivity.PARAM_HINT,response.getString("pista"));
-            getStartGameActivity().startActivity(i);
-        }
-        /*JSONArray hint = response.getJSONArray("pista");
-        List<String> listOfCharacters = new ArrayList<>();
-        for(int i=0;i<hint.length();i++){
-            String value = (String) hint.get(0);
-            listOfCharacters.add(value);
-        }
-        String[] arr = listOfCharacters.toArray(new String[listOfCharacters.size()]);
-        if(getStartGameActivity()!=null){
-            Intent i = new Intent(getStartGameActivity(),GuessActivity.class);
-            i.putExtra(GuessActivity.PARAM_HINT,arr);
-            getStartGameActivity().startActivity(i);
-        }*/
-
+        getGuessActivity().actualizarPista();
     }
 
 

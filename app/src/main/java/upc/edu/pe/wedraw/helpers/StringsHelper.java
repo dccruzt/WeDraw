@@ -29,7 +29,9 @@ public class StringsHelper {
 
     //Acciones recibidas
     public static final String ENABLE_START = "habilitarInicio";
-    public static final String START_GAME = "empezarJuego";
-    public static final String GET_HINT = "enviarPista";
+    public static final String TU_DIBUJAS = "tuDibujas";
+    public static final String TU_ADIVINAS = "tuAdivinas";
+    public static final String START_GAME = "empezarRonda";
+    public static final String UPDATE_HINT= "actualizarPista";
 
 }

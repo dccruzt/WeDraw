@@ -24,7 +24,6 @@ public class GuessActivity extends Activity implements View.OnClickListener{
     EditText eteWord;
     Button butGuess;
     TextView txtPlayerName,txtHint;
-    String mHint;
 
     public static final String PARAM_HINT = "param_hint";
 
@@ -33,11 +32,6 @@ public class GuessActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guess);
 
-        if(getIntent()==null || null == (mHint = getIntent().getStringExtra(PARAM_HINT))){
-            finish();
-            return;
-        }
-
         eteWord = (EditText) findViewById(R.id.activity_guess_word);
         butGuess = (Button) findViewById(R.id.activity_guess_button);
         txtPlayerName = (TextView) findViewById(R.id.txtPlayerName);
@@ -45,7 +39,11 @@ public class GuessActivity extends Activity implements View.OnClickListener{
         butGuess.setOnClickListener(this);
 
         txtPlayerName.setText(StatusHelper.playerName);
-        txtHint.setText(mHint);
+        txtHint.setText(StatusHelper.currentHint);
+    }
+
+    public void actualizarPista(){
+        txtHint.setText(StatusHelper.currentHint);
     }
 
     /**

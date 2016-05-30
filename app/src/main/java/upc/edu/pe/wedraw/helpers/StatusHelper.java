@@ -6,4 +6,6 @@ package upc.edu.pe.wedraw.helpers;
 public class StatusHelper {
 
     public static String playerName;
+    public static boolean isMyTurnToDraw;
+    public static String currentHint;
 }
