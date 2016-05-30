@@ -85,7 +85,7 @@ public class JsonHelper {
     //</editor-fold>
 
     public static JSONObject guessWord(String word){
-        JSONObject action= getDefaultAction(StringsHelper.GUESS_WORD);
+        JSONObject action= getDefaultAction(StringsHelper.GUESS_WORD, null);
         try {
             action.put(StringsHelper.WORD,word);
         } catch (JSONException e) {}

@@ -16,4 +16,12 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="connect_button">164dp</dimen>
     <dimen name="connect_button_text_size">32dp</dimen>
+
+    <!-- Loading activity -->
+    <dimen name="cargando_punto_size">20dp</dimen>
+    <dimen name="cargando_punto_marginRight">16dp</dimen>
+    <dimen name="cargando_punto_marginTop">15dp</dimen>
+    <dimen name="cargando_letra_marginTop">30dp</dimen>
+    <dimen name="inicio_letra">30dp</dimen>
+
 </resources>
