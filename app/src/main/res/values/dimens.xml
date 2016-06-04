@@ -42,6 +42,13 @@
     <!-- Guess activity -->
     <dimen name="guess_edit_top_margin">12dp</dimen>
 
+    <!-- Turn hint activity -->
+    <dimen name="turn_hint_activity_image_width">300dp</dimen>
+    <dimen name="turn_hint_activity_image_height">120dp</dimen>
+    <dimen name="turn_hint_activity_image_margin">36dp</dimen>
+
+    <!-- Countdown activity-->
+    <dimen name="countdown_activity_image_size">120dp</dimen>
 
     <!-- Loading activity -->
     <dimen name="cargando_punto_size">10dp</dimen>

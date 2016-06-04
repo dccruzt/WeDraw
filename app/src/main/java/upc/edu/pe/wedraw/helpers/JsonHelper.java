@@ -15,12 +15,12 @@ import org.json.JSONObject;
 public class JsonHelper {
 
     public static JSONObject ConnectTv(){
-        return getDefaultAction(StringsHelper.CONNECT_TV, null);
+        return getDefaultAction(StringsHelper.CONNECT_TV);
     }
 
     public static JSONObject ConnectPlayer(String player){
         try {
-            JSONObject jsonObject = getDefaultAction(StringsHelper.CONNECT_PLAYER, null);
+            JSONObject jsonObject = getDefaultAction(StringsHelper.CONNECT_PLAYER);
             jsonObject.put(StringsHelper.PLAYER, player);
             return jsonObject;
         } catch (Exception ex) {
@@ -29,27 +29,23 @@ public class JsonHelper {
     }
 
     public static JSONObject requestGameStart(){
-        return getDefaultAction(StringsHelper.REQUEST_START, null);
+        return getDefaultAction(StringsHelper.REQUEST_START);
     }
 
     public static JSONObject test(){
-        return getDefaultAction("test", null);
+        return getDefaultAction("test");
     }
 
     public static JSONObject makeDraw(int x, int y){
         try {
-            JSONObject jsonResult = new JSONObject();
-            jsonResult.put("x", x);
-            jsonResult.put("y", y);
-
-            JSONObject jsonObject = getDefaultAction(StringsHelper.MAKE_DRAW, jsonResult);
+            JSONObject jsonObject = getDefaultAction(StringsHelper.MAKE_DRAW);
+            jsonObject.put("x", x);
+            jsonObject.put("y", y);
             return jsonObject;
         } catch (Exception ex) {
             return null;
         }
     }
-
-
 
 
     //<editor-fold desc="Para enviar la dificultad escogida por el usuario">
@@ -75,7 +71,7 @@ public class JsonHelper {
      * @return JSONObject a ser mandado para ejecutar la acción de selección de dificultad
      */
     public static JSONObject selectGameDifficulty(Difficulties difficulty){
-        JSONObject action= getDefaultAction(StringsHelper.SEND_DIFFICULTY, null);
+        JSONObject action= getDefaultAction(StringsHelper.SEND_DIFFICULTY);
         try {
             action.put(StringsHelper.DIFFICULTY,difficulty.getId());
         } catch (JSONException e) {}
@@ -100,11 +96,10 @@ public class JsonHelper {
      * @param action acción que se le mandará al servidor
      * @return JSONObject cuyo único parámetro es la acción que se pasó en el parámetro
      */
-    private static JSONObject getDefaultAction(String action, JSONObject result){
+    private static JSONObject getDefaultAction(String action){
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(StringsHelper.ACTION, action);
-            jsonObject.put(StringsHelper.RESULT, result);
             return jsonObject;
         } catch (Exception ex) {
             return null;
