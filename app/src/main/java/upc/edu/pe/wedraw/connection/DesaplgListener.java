@@ -21,6 +21,7 @@ import upc.edu.pe.wedraw.InputNameActivity;
 import upc.edu.pe.wedraw.LoadingActivity;
 import upc.edu.pe.wedraw.SplashActivity;
 import upc.edu.pe.wedraw.StartGameActivity;
+import upc.edu.pe.wedraw.helpers.StatusHelper;
 import upc.edu.pe.wedraw.helpers.StringsHelper;
 
 /**
@@ -110,14 +111,16 @@ public class DesaplgListener implements WebAppSessionListener{
         try{
             JSONObject json = new JSONObject(message.toString());
             String accion = json.getString(StringsHelper.ACTION);
-            if(accion.equals(StringsHelper.ENABLE_START)){
-                habilitarInicio(json.getBoolean("habilitarInicio"));
+
+
+            if(accion.equals(StringsHelper.LOAD_INPUT)){
+                cargarInputNameActivity();
+            }else if(accion.equals(StringsHelper.ENABLE_START)){
+                habilitarInicio(true);
             }else if(accion.equals(StringsHelper.START_GAME)){
-                comenzarJuego();
+                comenzarJuego(json.getBoolean(StringsHelper.RESULT));
             }else if(accion.equals(StringsHelper.GET_HINT)){
                 parsearPalabra(json);
-            }else if(accion.equals(StringsHelper.LOAD_INPUT)){
-                cargarInputNameActivity();
             }
 
         }catch (Exception e){
@@ -125,15 +128,27 @@ public class DesaplgListener implements WebAppSessionListener{
         }
     }
 
+    //Función para que se cargue el InputNameActivity luego del LoadingActivity
+    public void cargarInputNameActivity(){
+
+        if(mLoadingActivity != null) {
+            Intent i = new Intent(mLoadingActivity, InputNameActivity.class);
+            mLoadingActivity.startActivity(i);
+            mLoadingActivity.finish();
+        }
+    }
+
+    //Función para activar el botón jugar del StartGameActivity
     public void habilitarInicio(boolean habilitado){
         if(getStartGameActivity()!=null){
             getStartGameActivity().activarJugar(habilitado);
         }
     }
 
-    public void comenzarJuego(){
+    //Función para activar la imagen "tuadivinas" o "tudibujas"
+    public void comenzarJuego(boolean dibujante){
         if(getStartGameActivity()!=null){
-            getStartGameActivity().startGame();
+            getStartGameActivity().startGame(dibujante);
         }
     }
 
@@ -142,7 +157,7 @@ public class DesaplgListener implements WebAppSessionListener{
             return;
         if(getStartGameActivity()!=null){
             Intent i = new Intent(getStartGameActivity(),GuessActivity.class);
-            i.putExtra(GuessActivity.PARAM_HINT,response.getString("pista"));
+            i.putExtra(GuessActivity.PARAM_HINT, response.getString("pista"));
             getStartGameActivity().startActivity(i);
         }
         /*JSONArray hint = response.getJSONArray("pista");
@@ -160,14 +175,7 @@ public class DesaplgListener implements WebAppSessionListener{
 
     }
 
-    public void cargarInputNameActivity(){
 
-        if(mLoadingActivity != null) {
-            Intent i = new Intent(mLoadingActivity, InputNameActivity.class);
-            mLoadingActivity.startActivity(i);
-            mLoadingActivity.finish();
-        }
-    }
 
     @Override
     public void onWebAppSessionDisconnect(WebAppSession webAppSession) {

@@ -46,7 +46,7 @@ public class InputNameActivity extends Activity{
                 Intent i = new Intent(InputNameActivity.this, StartGameActivity.class);
                 startActivity(i);
                 //TODO: uncomment this
-                /*if(Pattern.matches(NAME_REGEX, name)){
+                if(Pattern.matches(NAME_REGEX, name)){
                     //Enviar el nombre al webapp
                     ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.ConnectPlayer(name), new ResponseListener<Object>() {
                         @Override
@@ -63,7 +63,7 @@ public class InputNameActivity extends Activity{
                     });
                 } else {
                     Toast.makeText(getApplicationContext(), NAME_ERROR, Toast.LENGTH_SHORT).show();
-                }*/
+                }
             }
         });
     }

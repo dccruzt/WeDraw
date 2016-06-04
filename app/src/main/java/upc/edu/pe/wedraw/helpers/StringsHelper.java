@@ -21,7 +21,7 @@ public class StringsHelper {
     //Acciones enviadas
     public static final String CONNECT_TV = "conectarTV";
     public static final String CONNECT_PLAYER = "conectarJugador";
-    public static final String REQUEST_START = "solicitarInicio";
+    public static final String REQUEST_START = "empezarJuego";
     public static final String SEND_DIFFICULTY = "enviarDificultad";
     public static final String GUESS_WORD = "adivinarPalabra";
     public static final String MAKE_DRAW = "dibujar";
@@ -29,8 +29,10 @@ public class StringsHelper {
 
     //Acciones recibidas
     public static final String LOAD_INPUT = "cargarInicio";
-    public static final String ENABLE_START = "habilitarInicio";
-    public static final String START_GAME = "empezarJuego";
+    public static final String ENABLE_START = "puedeIniciar";
+
+
+    public static final String START_GAME = "cargarJuego";
     public static final String GET_HINT = "enviarPista";
 
 }

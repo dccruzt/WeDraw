@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 public class StatusHelper {
 
     public static String playerName;
+    public static boolean btnJugar_activo = false;
 
     public static void unbindDrawables(View view)
     {

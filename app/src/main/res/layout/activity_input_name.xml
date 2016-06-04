@@ -56,7 +56,7 @@
         android:textAlignment="center"
         android:layout_gravity="center_horizontal"/>
 
-    <EditText
+    <upc.edu.pe.wedraw.components.CustomEditText
         android:id="@+id/activity_input_name_edit_text"
         android:layout_width="@dimen/input_width"
         android:layout_height="wrap_content"
@@ -67,7 +67,9 @@
         android:textColor="@color/white"
         android:padding="8dp"
         tools:text="Name"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:hint="@string/textbox_conectar"
+        android:maxLength="15"/>
 
     <Button
         android:id="@+id/activity_input_name_button"

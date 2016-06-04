@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,51 +26,36 @@ public class StartGameActivity extends AppCompatActivity{
 
     Button mStartButton;
     CustomTextView txtPlayerName,txtHint;
+    ImageView imgRolJugador;
 
     boolean currentStatus = false;
     int count =0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
+        ConnectionHelper.sDesaplgListener.setStartGameActivity(this);
 
+        imgRolJugador = (ImageView) findViewById(R.id.imgRolJugador);
         txtPlayerName = (CustomTextView) findViewById(R.id.txtPlayerName);
         txtPlayerName.setText(StatusHelper.playerName);
         txtHint = (CustomTextView) findViewById(R.id.txtHint);
 
-        Button test = (Button) findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                count++;
-                if(count>3){
-                    activarJugar(true);
-                }
-                if(count>5){
-                    count=0;
-                    activarJugar(false);
-                }
-            }
-        });
-
         mStartButton = (Button) findViewById(R.id.activity_start_game_start_button);
-        mStartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(currentStatus) {
-                    Intent i = new Intent(StartGameActivity.this, DifficultyActivity.class);
-                    startActivity(i);
-                }
-                /*ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.requestGameStart(), new ResponseListener<Object>() {
-                    @Override
-                    public void onSuccess(Object object) {
-                        startGame();//TODO: comment this out
-                    }
-                    @Override
-                    public void onError(ServiceCommandError error) {
+    }
 
-                    }
-                });*/
+    public void jugar(View v){
+
+        ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.requestGameStart(), new ResponseListener<Object>() {
+            @Override
+            public void onSuccess(Object object) {
+            }
+
+            @Override
+            public void onError(ServiceCommandError error) {
+
             }
         });
     }
@@ -77,9 +63,25 @@ public class StartGameActivity extends AppCompatActivity{
     /**
      * Método invocado cuando la TV mande una señal indicando que el juego debe comenzar
      */
-    public void startGame(){
-        Intent i = new Intent(StartGameActivity.this, StartGameActivity.class);
-        startActivity(i);
+    public void startGame(boolean dibujante){
+
+        findViewById(R.id.layoutStartGame).setVisibility(View.GONE);
+
+        if(dibujante){
+            imgRolJugador.setImageResource(R.drawable.tudibujas);
+        }
+        else{
+            imgRolJugador.setImageResource(R.drawable.tuadivinas);
+        }
+
+        imgRolJugador.postDelayed(new Runnable() {
+            public void run() {
+
+                Intent i = new Intent(StartGameActivity.this, DifficultyActivity.class);
+                startActivity(i);
+                finish();
+            }
+        }, 3000);
     }
 
     /**
