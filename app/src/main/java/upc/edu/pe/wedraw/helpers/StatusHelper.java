@@ -14,7 +14,7 @@ public class StatusHelper {
     public static String currentHint;
     public static boolean isMyTurnToDraw;
 
-    public static void unbindDrawables(View view)
+    public static void unbindDrawables(View view) 
     {
         if (view.getBackground() != null)
         {
