@@ -65,6 +65,7 @@ public class StartGameActivity extends AppCompatActivity{
      */
     public void startGame(boolean dibujante){
 
+
         findViewById(R.id.layoutStartGame).setVisibility(View.GONE);
 
         if(dibujante){

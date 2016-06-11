@@ -2,11 +2,13 @@ package upc.edu.pe.wedraw.components;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -15,8 +17,13 @@ import android.view.View;
 import com.connectsdk.service.capability.listeners.ResponseListener;
 import com.connectsdk.service.command.ServiceCommandError;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import upc.edu.pe.wedraw.R;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 import upc.edu.pe.wedraw.helpers.JsonHelper;
+import upc.edu.pe.wedraw.helpers.WedrawUtils;
 
 public class DrawingView extends View {
 
@@ -30,6 +37,9 @@ public class DrawingView extends View {
     private Paint circlePaint;
     private Path circlePath;
     private Paint mPaint;
+    private Bitmap mBackground;
+    private int drawableSpotColor;
+    private List<Integer> mNotAllowedColors;
 
     public DrawingView(Context c, AttributeSet attrs){
         super(c,attrs);
@@ -41,7 +51,18 @@ public class DrawingView extends View {
         init(c);
     }
 
+    public void initBitmap(){
+        mBackground = WedrawUtils.getBitmapFromView(this);
+        mNotAllowedColors = new ArrayList<>();
+        mNotAllowedColors.add(ContextCompat.getColor(context, R.color.not_drawable_color));
+        mNotAllowedColors.add(ContextCompat.getColor(context, R.color.not_drawable_color2));
+        mNotAllowedColors.add(ContextCompat.getColor(context, R.color.not_drawable_color3));
+
+    }
+
     private void init(Context c){
+
+        //mBackground = WedrawUtils.getBitmapFromView(this);
 
         context=c;
         mPath = new Path();
@@ -126,12 +147,18 @@ public class DrawingView extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                touch_start(x, y);
-                invalidate();
+                if(isDrawableSpot(x,y)) {
+                    touch_start(x, y);
+                    invalidate();
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
+                if(!isDrawableSpot(x,y)){
+                    break;
+                }
                 touch_move(x, y);
-
+                touch_up();
+                touch_start(x,y);
                 ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(Math.round(x),Math.round(y)), new ResponseListener<Object>() {
 
                     @Override
@@ -148,13 +175,32 @@ public class DrawingView extends View {
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                touch_up();
+                //touch_up();
                 invalidate();
                 break;
         }
         return true;
     }
 
+    /**
+     * Decide si el lugar donde se ha presionado puede colorearse o no
+     * @param x coordenada x donde se le dio click
+     * @param y coordenada y donde se le dio click
+     * @return
+     */
+    private boolean isDrawableSpot(float x, float y) {
+        try {
+            int pixel = mBackground.getPixel((int) x, (int) y);
+            int G = (pixel >> 8) & 0xff;
+            return G*2>255;
+        }catch (IllegalArgumentException ex){
+            return false;
+        }
+    }
+
+    /**
+     * Borra todos los dibujos que se han hecho sobre la imagen
+     */
     public void clearDrawing()
     {
         setDrawingCacheEnabled(false);

@@ -37,7 +37,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 //Intent i = new Intent(SplashActivity.this, ConnectActivity.class);
-                Intent i = new Intent(SplashActivity.this, DifficultyActivity.class);
+                Intent i = new Intent(SplashActivity.this, DrawActivity.class);
                 SplashActivity.this.startActivity(i);
                 SplashActivity.this.finish();
             }

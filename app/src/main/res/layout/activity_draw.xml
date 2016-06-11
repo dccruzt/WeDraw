@@ -88,17 +88,19 @@
                     android:text="Test"/>
             </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/llaHeader"
                 android:layout_above="@+id/llaFooter"
-                android:background="@drawable/pizarra">
+                >
                 <upc.edu.pe.wedraw.components.DrawingView
                     android:id="@+id/drawingView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/pizarra" />
+            </RelativeLayout>
 
         </RelativeLayout>
 

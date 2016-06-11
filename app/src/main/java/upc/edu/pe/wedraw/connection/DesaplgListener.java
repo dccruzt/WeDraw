@@ -15,12 +15,14 @@ import java.util.Collections;
 import java.util.List;
 
 import upc.edu.pe.wedraw.ConnectActivity;
+import upc.edu.pe.wedraw.DifficultyActivity;
 import upc.edu.pe.wedraw.GuessActivity;
 import upc.edu.pe.wedraw.DrawActivity;
 import upc.edu.pe.wedraw.InputNameActivity;
 import upc.edu.pe.wedraw.LoadingActivity;
 import upc.edu.pe.wedraw.SplashActivity;
 import upc.edu.pe.wedraw.StartGameActivity;
+import upc.edu.pe.wedraw.TurnHintActivity;
 import upc.edu.pe.wedraw.helpers.StatusHelper;
 import upc.edu.pe.wedraw.helpers.StringsHelper;
 
@@ -46,6 +48,8 @@ public class DesaplgListener implements WebAppSessionListener{
     private StartGameActivity mStartGameActivity;
     private GuessActivity mGuessActivity;
     private DrawActivity mDrawActivity;
+    private DifficultyActivity mDifficultyActivity;
+    private TurnHintActivity mTurnActivity;
 
     public SplashActivity getSplashActivity() {
         return mSplashActivity;
@@ -95,6 +99,22 @@ public class DesaplgListener implements WebAppSessionListener{
         mGuessActivity = guessActivity;
     }
 
+    public DifficultyActivity getDifficultyActivity() {
+        return mDifficultyActivity;
+    }
+
+    public void setDifficultyActivity(DifficultyActivity difficultyActivity) {
+        mDifficultyActivity = difficultyActivity;
+    }
+
+
+    public TurnHintActivity getTurnHintActivity() {
+        return mTurnActivity;
+    }
+
+    public void setTurnHintActivity(TurnHintActivity turnActivity) {
+        mTurnActivity = turnActivity;
+    }
     //</editor-fold>
 
 
