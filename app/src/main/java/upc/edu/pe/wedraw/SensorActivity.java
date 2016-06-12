@@ -21,13 +21,16 @@ public abstract class SensorActivity extends AppCompatActivity implements Sensor
     protected Sensor mSensor;
     private long mLastUpdate;
     protected int UPDATE_THRESHOLD = 300;
+    protected boolean forceCloseIfSensorNotAvailable = false;
+    protected boolean isSensorAvailable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         //validate that sensor is available, before showing the activity
-        if(null == (mSensor = mSensorManager.getDefaultSensor(getSensorType()))) {
+        isSensorAvailable = null != (mSensor = mSensorManager.getDefaultSensor(getSensorType()));
+        if(!isSensorAvailable && forceCloseIfSensorNotAvailable) {
             Toast.makeText(getApplicationContext(),"Sensor no disponible",Toast.LENGTH_SHORT).show();
             finish();
         }

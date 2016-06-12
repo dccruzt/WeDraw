@@ -67,7 +67,8 @@ public class DifficultyActivity extends /*Sensor*/Activity implements View.OnCli
         buttonMedium.setSelected(v.getId()==R.id.buttonMedium);
         buttonHard.setSelected(v.getId()==R.id.buttonHard);
 
-
+        if(!isSensorAvailable)
+            startGame();
     }
 
     /**
@@ -95,6 +96,10 @@ public class DifficultyActivity extends /*Sensor*/Activity implements View.OnCli
         }
     }
 
+    private void startGame(){
+        ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.selectGameDifficulty(currentDifficulty), null);
+    }
+
     //<editor-fold desc="Detección de giro de 90º para iniciar el juego">
     /*@Override
     protected int getSensorType() {
@@ -105,7 +110,6 @@ public class DifficultyActivity extends /*Sensor*/Activity implements View.OnCli
     protected String getSensorFeature() {
         return PackageManager.FEATURE_SENSOR_GYROSCOPE;
     }
-
 
     private static final ScheduledExecutorService worker =
             Executors.newSingleThreadScheduledExecutor();
@@ -138,7 +142,7 @@ public class DifficultyActivity extends /*Sensor*/Activity implements View.OnCli
                     mTask = null;
                 else
                     mTask.cancel(true);
-                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.selectGameDifficulty(currentDifficulty), null);
+                startGame();
             }
         }
     }
