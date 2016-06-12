@@ -71,11 +71,13 @@ public class JsonHelper {
      * @return JSONObject a ser mandado para ejecutar la acción de selección de dificultad
      */
     public static JSONObject selectGameDifficulty(Difficulties difficulty){
-        JSONObject action= getDefaultAction(StringsHelper.SEND_DIFFICULTY);
+        JSONObject jsonObject= getDefaultAction(StringsHelper.SEND_DIFFICULTY);
         try {
-            action.put(StringsHelper.DIFFICULTY,difficulty.getId());
-        } catch (JSONException e) {}
-        return action;
+            jsonObject.put(StringsHelper.RESULT,difficulty.getId());
+            return jsonObject;
+        } catch (JSONException e) {
+            return null;
+        }
     }
 
     //</editor-fold>
@@ -84,6 +86,7 @@ public class JsonHelper {
         JSONObject action= getDefaultAction(StringsHelper.GUESS_WORD);
         try {
             action.put(StringsHelper.WORD,word);
+            return action;
         } catch (JSONException e) {}
         return action;
     }

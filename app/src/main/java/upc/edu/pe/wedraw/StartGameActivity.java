@@ -74,6 +74,7 @@ public class StartGameActivity extends AppCompatActivity{
 
         if(dibujante){
             imgRolJugador.setImageResource(R.drawable.tudibujas);
+            StatusHelper.dibujante = true;
 
             new Handler().postDelayed(new Runnable() {
 
@@ -84,7 +85,7 @@ public class StartGameActivity extends AppCompatActivity{
                     StartGameActivity.this.startActivity(i);
                     StartGameActivity.this.finish();
                 }
-            }, 3000);
+            }, 5000);
         }
         else{
             imgRolJugador.setImageResource(R.drawable.tuadivinas);

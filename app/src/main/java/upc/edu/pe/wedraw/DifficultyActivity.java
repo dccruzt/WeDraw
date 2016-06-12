@@ -27,7 +27,7 @@ import upc.edu.pe.wedraw.connection.DesaplgListener;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 import upc.edu.pe.wedraw.helpers.JsonHelper;
 
-public class DifficultyActivity extends /*Sensor*/Activity implements View.OnClickListener{
+public class DifficultyActivity extends SensorActivity implements View.OnClickListener{
 
     Button buttonEasy, buttonMedium, buttonHard;
     JsonHelper.Difficulties currentDifficulty;
@@ -101,7 +101,7 @@ public class DifficultyActivity extends /*Sensor*/Activity implements View.OnCli
     }
 
     //<editor-fold desc="Detección de giro de 90º para iniciar el juego">
-    /*@Override
+    @Override
     protected int getSensorType() {
         return Sensor.TYPE_GYROSCOPE;
     }
@@ -146,5 +146,5 @@ public class DifficultyActivity extends /*Sensor*/Activity implements View.OnCli
             }
         }
     }
-    //</editor-fold>*/
+    //</editor-fold>
 }

@@ -139,7 +139,13 @@ public class DesaplgListener implements WebAppSessionListener{
                 habilitarInicio(true);
             }else if(accion.equals(StringsHelper.IS_DRAWER)){
                 validarRol(json.getBoolean(StringsHelper.RESULT));
-            }else if(accion.equals(StringsHelper.GET_HINT)){
+            }else if(accion.equals(StringsHelper.START_TURN)){
+                empezarTurno(json.getString(StringsHelper.RESULT));
+            }
+
+
+
+            else if(accion.equals(StringsHelper.GET_HINT)){
                 parsearPalabra(json);
             }
 
@@ -173,6 +179,22 @@ public class DesaplgListener implements WebAppSessionListener{
         }
     }
 
+    public void empezarTurno(String palabra){
+
+        if(StatusHelper.dibujante){
+
+            Intent i = new Intent(getDifficultyActivity(), DrawActivity.class);
+            getDifficultyActivity().startActivity(i);
+            getDifficultyActivity().finish();
+        }else{
+
+            Intent j = new Intent(getStartGameActivity(), GuessActivity.class);
+            getStartGameActivity().startActivity(j);
+            getStartGameActivity().finish();
+        }
+    }
+
+
     public void parsearPalabra(JSONObject response) throws JSONException{
         if(getGuessActivity()==null)
             return;
@@ -193,9 +215,7 @@ public class DesaplgListener implements WebAppSessionListener{
             i.putExtra(GuessActivity.PARAM_HINT,arr);
             getStartGameActivity().startActivity(i);
         }*/
-
     }
-
 
 
     @Override

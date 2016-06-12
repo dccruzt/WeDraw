@@ -11,6 +11,7 @@ public class StatusHelper {
 
     public static String playerName;
     public static boolean btnJugar_activo = false;
+    public static boolean dibujante = false;
     public static String currentHint;
     public static boolean isMyTurnToDraw;
 
