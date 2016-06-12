@@ -3,13 +3,12 @@ package upc.edu.pe.wedraw;
 import android.content.Intent;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.connectsdk.service.capability.listeners.ResponseListener;
 import com.connectsdk.service.command.ServiceCommandError;
@@ -44,6 +43,10 @@ public class StartGameActivity extends AppCompatActivity{
         txtHint = (CustomTextView) findViewById(R.id.txtHint);
 
         mStartButton = (Button) findViewById(R.id.activity_start_game_start_button);
+
+        if(StatusHelper.btnJugar_activo){
+            activarJugar(true);
+        }
     }
 
     public void jugar(View v){
@@ -51,6 +54,7 @@ public class StartGameActivity extends AppCompatActivity{
         ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.requestGameStart(), new ResponseListener<Object>() {
             @Override
             public void onSuccess(Object object) {
+
             }
 
             @Override
@@ -63,26 +67,28 @@ public class StartGameActivity extends AppCompatActivity{
     /**
      * Método invocado cuando la TV mande una señal indicando que el juego debe comenzar
      */
-    public void startGame(boolean dibujante){
+    public void validarRol(boolean dibujante){
 
 
-        findViewById(R.id.layoutStartGame).setVisibility(View.GONE);
+        findViewById(R.id.layoutStartGame).setVisibility(View.INVISIBLE);
 
         if(dibujante){
             imgRolJugador.setImageResource(R.drawable.tudibujas);
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    final Intent i = new Intent(StartGameActivity.this, DifficultyActivity.class);
+                    StartGameActivity.this.startActivity(i);
+                    StartGameActivity.this.finish();
+                }
+            }, 3000);
         }
         else{
             imgRolJugador.setImageResource(R.drawable.tuadivinas);
         }
-
-        imgRolJugador.postDelayed(new Runnable() {
-            public void run() {
-
-                Intent i = new Intent(StartGameActivity.this, DifficultyActivity.class);
-                startActivity(i);
-                finish();
-            }
-        }, 3000);
     }
 
     /**
@@ -105,6 +111,4 @@ public class StartGameActivity extends AppCompatActivity{
             txtHint.setText(getString(R.string.waiting_players));
         }
     }
-
-
 }

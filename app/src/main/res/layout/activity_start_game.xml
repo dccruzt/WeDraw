@@ -30,6 +30,7 @@
             android:layout_width="@dimen/connect_button"
             android:layout_height="@dimen/connect_button"
             android:onClick="jugar"
+            android:enabled="false"
             android:textSize="@dimen/connect_button_text_size"
             android:background="@drawable/transition_play" />
 

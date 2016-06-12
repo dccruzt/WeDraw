@@ -137,8 +137,8 @@ public class DesaplgListener implements WebAppSessionListener{
                 cargarInputNameActivity();
             }else if(accion.equals(StringsHelper.ENABLE_START)){
                 habilitarInicio(true);
-            }else if(accion.equals(StringsHelper.START_GAME)){
-                comenzarJuego(json.getBoolean(StringsHelper.RESULT));
+            }else if(accion.equals(StringsHelper.IS_DRAWER)){
+                validarRol(json.getBoolean(StringsHelper.RESULT));
             }else if(accion.equals(StringsHelper.GET_HINT)){
                 parsearPalabra(json);
             }
@@ -163,12 +163,13 @@ public class DesaplgListener implements WebAppSessionListener{
         if(getStartGameActivity()!=null){
             getStartGameActivity().activarJugar(habilitado);
         }
+        StatusHelper.btnJugar_activo = true;
     }
 
     //Función para activar la imagen "tuadivinas" o "tudibujas"
-    public void comenzarJuego(boolean dibujante){
-        if(getStartGameActivity()!=null){
-            getStartGameActivity().startGame(dibujante);
+    public void validarRol(boolean dibujante){
+        if(getStartGameActivity()!= null){
+            getStartGameActivity().validarRol(dibujante);
         }
     }
 
