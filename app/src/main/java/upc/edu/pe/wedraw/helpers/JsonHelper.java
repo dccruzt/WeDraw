@@ -1,5 +1,7 @@
 package upc.edu.pe.wedraw.helpers;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,13 +34,20 @@ public class JsonHelper {
         return getDefaultAction(StringsHelper.REQUEST_START);
     }
 
-    public static JSONObject test(){
-        return getDefaultAction("test");
-    }
-
     public static JSONObject makeDraw(int x, int y){
         try {
             JSONObject jsonObject = getDefaultAction(StringsHelper.MAKE_DRAW);
+            jsonObject.put("x", x);
+            jsonObject.put("y", y);
+            return jsonObject;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public static JSONObject setPosition(int x, int y){
+        try {
+            JSONObject jsonObject = getDefaultAction(StringsHelper.SET_POSITION);
             jsonObject.put("x", x);
             jsonObject.put("y", y);
             return jsonObject;
@@ -58,7 +67,7 @@ public class JsonHelper {
         EASY("facil"),MEDIUM("intermedio"),HARD("avanzado");
         private String mId;
         Difficulties(String id){
-            id = mId;
+            mId = id;
         }
         public String getId(){
             return mId;
@@ -73,7 +82,8 @@ public class JsonHelper {
     public static JSONObject selectGameDifficulty(Difficulties difficulty){
         JSONObject jsonObject= getDefaultAction(StringsHelper.SEND_DIFFICULTY);
         try {
-            jsonObject.put(StringsHelper.RESULT,difficulty.getId());
+
+            jsonObject.put(StringsHelper.RESULT, difficulty.getId());
             return jsonObject;
         } catch (JSONException e) {
             return null;

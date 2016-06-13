@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import upc.edu.pe.wedraw.ConnectActivity;
+import upc.edu.pe.wedraw.CountdownActivity;
 import upc.edu.pe.wedraw.DifficultyActivity;
 import upc.edu.pe.wedraw.GuessActivity;
 import upc.edu.pe.wedraw.DrawActivity;
@@ -50,6 +51,7 @@ public class DesaplgListener implements WebAppSessionListener{
     private DrawActivity mDrawActivity;
     private DifficultyActivity mDifficultyActivity;
     private TurnHintActivity mTurnActivity;
+    private CountdownActivity mCountdownActivity;
 
     public SplashActivity getSplashActivity() {
         return mSplashActivity;
@@ -107,16 +109,22 @@ public class DesaplgListener implements WebAppSessionListener{
         mDifficultyActivity = difficultyActivity;
     }
 
+    public CountdownActivity getCountdownActivity() {
+        return mCountdownActivity;
+    }
+
+    public void setCountdownActivity(CountdownActivity countdownActivity) {
+        mCountdownActivity = countdownActivity;
+    }
 
     public TurnHintActivity getTurnHintActivity() {
         return mTurnActivity;
     }
 
     public void setTurnHintActivity(TurnHintActivity turnActivity) {
+
         mTurnActivity = turnActivity;
     }
-    //</editor-fold>
-
 
     public DrawActivity getDrawActivity() {
         return mDrawActivity;
@@ -166,7 +174,9 @@ public class DesaplgListener implements WebAppSessionListener{
 
     //Función para activar el botón jugar del StartGameActivity
     public void habilitarInicio(boolean habilitado){
+
         if(getStartGameActivity()!=null){
+
             getStartGameActivity().activarJugar(habilitado);
         }
         StatusHelper.btnJugar_activo = true;
@@ -174,23 +184,35 @@ public class DesaplgListener implements WebAppSessionListener{
 
     //Función para activar la imagen "tuadivinas" o "tudibujas"
     public void validarRol(boolean dibujante){
-        if(getStartGameActivity()!= null){
-            getStartGameActivity().validarRol(dibujante);
+
+        if (getStartGameActivity() != null){
+            StatusHelper.isMyTurnToDraw = dibujante;
+
+            Intent i = new Intent(getStartGameActivity(), TurnHintActivity.class);
+            getStartGameActivity().startActivity(i);
+            getStartGameActivity().finish();
         }
     }
 
     public void empezarTurno(String palabra){
 
-        if(StatusHelper.dibujante){
+        StatusHelper.word = palabra;
+        if(StatusHelper.isMyTurnToDraw){
 
-            Intent i = new Intent(getDifficultyActivity(), DrawActivity.class);
-            getDifficultyActivity().startActivity(i);
-            getDifficultyActivity().finish();
-        }else{
+            if (getDifficultyActivity() != null){
 
-            Intent j = new Intent(getStartGameActivity(), GuessActivity.class);
-            getStartGameActivity().startActivity(j);
-            getStartGameActivity().finish();
+                Intent i = new Intent(getDifficultyActivity(), CountdownActivity.class);
+                getDifficultyActivity().startActivity(i);
+                getDifficultyActivity().finish();
+            }
+        }else {
+
+            if (getTurnHintActivity() != null){
+
+                Intent i = new Intent(getTurnHintActivity(), CountdownActivity.class);
+                getTurnHintActivity().startActivity(i);
+                getTurnHintActivity().finish();
+            }
         }
     }
 
@@ -217,11 +239,8 @@ public class DesaplgListener implements WebAppSessionListener{
         }*/
     }
 
-
     @Override
     public void onWebAppSessionDisconnect(WebAppSession webAppSession) {
 
     }
-
-
 }

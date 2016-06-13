@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.connectsdk.service.capability.listeners.ResponseListener;
@@ -28,21 +29,26 @@ import java.util.concurrent.TimeUnit;
 import upc.edu.pe.wedraw.components.DrawingView;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 import upc.edu.pe.wedraw.helpers.JsonHelper;
+import upc.edu.pe.wedraw.helpers.StatusHelper;
 import upc.edu.pe.wedraw.helpers.WedrawUtils;
 
 public class DrawActivity extends AppCompatActivity implements SensorEventListener{
 
     DrawingView drawingView;
     Button mSelectedColor;
+    TextView txtWord;
     private double ASPECT_RATIO = 1.61;
     //private double mAspectRatio = 827 / 1332;// 1332 / 827; //width / height
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
-
         ConnectionHelper.sDesaplgListener.setDrawActivity(this);
+
+        txtWord = (TextView) findViewById(R.id.txtWord);
+        txtWord.setText(StatusHelper.word);
         drawingView = (DrawingView) findViewById(R.id.drawingView);
         drawingView.post(new Runnable() {
             @Override

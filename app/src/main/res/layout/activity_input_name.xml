@@ -74,9 +74,9 @@
     <Button
         android:id="@+id/activity_input_name_button"
         android:layout_width="@dimen/input_width"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
+        android:background="@drawable/conectar"
         android:padding="@dimen/button_padding"
-        android:text="@string/connect"
         android:textSize="@dimen/button_text_size_normal"
         android:layout_gravity="center_horizontal" />
 

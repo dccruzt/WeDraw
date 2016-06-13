@@ -25,8 +25,9 @@ public class StringsHelper {
     public static final String SEND_DIFFICULTY = "enviarDificultad";
 
 
-    public static final String GUESS_WORD = "adivinarPalabra";
+    public static final String SET_POSITION = "setearPosicion";
     public static final String MAKE_DRAW = "dibujar";
+    public static final String GUESS_WORD = "adivinarPalabra";
     public static final String DISCONNECT_PLAYER = "desconectarJugador";
 
     //Acciones recibidas

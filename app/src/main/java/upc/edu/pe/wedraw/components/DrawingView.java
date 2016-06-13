@@ -149,6 +149,7 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_DOWN:
                 if(isDrawableSpot(x,y)) {
                     touch_start(x, y);
+                    ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.setPosition(Math.round(x), Math.round(y)), null);
                     invalidate();
                 }
                 break;
@@ -159,23 +160,11 @@ public class DrawingView extends View {
                 touch_move(x, y);
                 touch_up();
                 touch_start(x,y);
-                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(Math.round(x),Math.round(y)), new ResponseListener<Object>() {
-
-                    @Override
-                    public void onError(ServiceCommandError error) {
-                        Log.e("error", "");
-                    }
-
-                    @Override
-                    public void onSuccess(Object object) {
-                        Log.e("exito", "");
-                    }
-                });
-
+                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(Math.round(x),Math.round(y)), null);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                //touch_up();
+                touch_up();
                 invalidate();
                 break;
         }

@@ -25,7 +25,6 @@ public class StartGameActivity extends AppCompatActivity{
 
     Button mStartButton;
     CustomTextView txtPlayerName,txtHint;
-    ImageView imgRolJugador;
 
     boolean currentStatus = false;
     int count =0;
@@ -37,7 +36,6 @@ public class StartGameActivity extends AppCompatActivity{
         setContentView(R.layout.activity_start_game);
         ConnectionHelper.sDesaplgListener.setStartGameActivity(this);
 
-        imgRolJugador = (ImageView) findViewById(R.id.imgRolJugador);
         txtPlayerName = (CustomTextView) findViewById(R.id.txtPlayerName);
         txtPlayerName.setText(StatusHelper.playerName);
         txtHint = (CustomTextView) findViewById(R.id.txtHint);
@@ -62,34 +60,6 @@ public class StartGameActivity extends AppCompatActivity{
 
             }
         });
-    }
-
-    /**
-     * Método invocado cuando la TV mande una señal indicando que el juego debe comenzar
-     */
-    public void validarRol(boolean dibujante){
-
-
-        findViewById(R.id.layoutStartGame).setVisibility(View.INVISIBLE);
-
-        if(dibujante){
-            imgRolJugador.setImageResource(R.drawable.tudibujas);
-            StatusHelper.dibujante = true;
-
-            new Handler().postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-
-                    final Intent i = new Intent(StartGameActivity.this, DifficultyActivity.class);
-                    StartGameActivity.this.startActivity(i);
-                    StartGameActivity.this.finish();
-                }
-            }, 5000);
-        }
-        else{
-            imgRolJugador.setImageResource(R.drawable.tuadivinas);
-        }
     }
 
     /**

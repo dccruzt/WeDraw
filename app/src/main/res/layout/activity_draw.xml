@@ -48,7 +48,7 @@
             <Button
                 android:id="@+id/buttonBlue"
                 style="@style/ColorOptionStyle"
-                android:background="@drawable/paint_negro"/>
+                android:background="@drawable/paint_azul"/>
 
             <Button
                 android:id="@+id/buttonErase"
@@ -105,6 +105,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
 
 </RelativeLayout>

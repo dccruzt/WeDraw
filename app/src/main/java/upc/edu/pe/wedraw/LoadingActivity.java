@@ -91,7 +91,6 @@ public class LoadingActivity extends Activity {
     @Override
     protected void onDestroy() {
 
-        Log.e("", "cargandooo");
         ConnectionHelper.sDesaplgListener.setLoadingActivity(null);
         super.onDestroy();
         StatusHelper.unbindDrawables(findViewById(R.id.layoutCargando));

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 import upc.edu.pe.wedraw.helpers.StatusHelper;
 
 public class CountdownActivity extends Activity {
@@ -19,6 +20,8 @@ public class CountdownActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
+        ConnectionHelper.sDesaplgListener.setCountdownActivity(this);
+
         txtCount = (TextView) findViewById(R.id.txtCount);
         count = 3;
         decreaseCounter();
@@ -31,21 +34,22 @@ public class CountdownActivity extends Activity {
             @Override
             public void run() {
                 if(count>0) {
-                    count--;
                     txtCount.setText(String.valueOf(count));
+                    count--;
+                    decreaseCounter();
                 }else{
                     //Go to drawing
                     if(StatusHelper.isMyTurnToDraw){
                         Intent i = new Intent(CountdownActivity.this,DrawActivity.class);
                         startActivity(i);
+                        finish();
                     }else{
                         Intent i = new Intent(CountdownActivity.this,GuessActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 }
             }
         }, INTERVAL);
     }
-
-
 }
