@@ -149,6 +149,8 @@ public class DesaplgListener implements WebAppSessionListener{
                 validarRol(json.getBoolean(StringsHelper.RESULT));
             }else if(accion.equals(StringsHelper.START_TURN)){
                 empezarTurno(json.getString(StringsHelper.RESULT));
+            }else if(accion.equals(StringsHelper.END_TURN)){
+                terminarTurno();
             }
 
 
@@ -212,6 +214,23 @@ public class DesaplgListener implements WebAppSessionListener{
                 Intent i = new Intent(getTurnHintActivity(), CountdownActivity.class);
                 getTurnHintActivity().startActivity(i);
                 getTurnHintActivity().finish();
+            }
+        }
+    }
+
+    public void terminarTurno(){
+
+        if(StatusHelper.isMyTurnToDraw){
+
+            if (getDrawActivity() != null){
+
+                getDrawActivity().habilitarElementos(false);
+            }
+        }else {
+
+            if (getGuessActivity() != null){
+
+                getGuessActivity().habilitarElementos(false);
             }
         }
     }

@@ -1,10 +1,13 @@
 package upc.edu.pe.wedraw;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.app.Activity;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,9 +21,11 @@ import java.util.regex.Pattern;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 import upc.edu.pe.wedraw.helpers.JsonHelper;
 import upc.edu.pe.wedraw.helpers.StatusHelper;
+import upc.edu.pe.wedraw.helpers.StringsHelper;
 
 public class GuessActivity extends Activity implements View.OnClickListener{
 
+    private ViewGroup layoutGuess;
     EditText eteWord;
     Button butGuess;
     TextView txtPlayerName,txtHint;
@@ -32,6 +37,7 @@ public class GuessActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guess);
 
+        layoutGuess = (ViewGroup) findViewById(R.id.layoutGuess);
         eteWord = (EditText) findViewById(R.id.activity_guess_word);
         butGuess = (Button) findViewById(R.id.activity_guess_button);
         txtPlayerName = (TextView) findViewById(R.id.txtPlayerName);
@@ -40,6 +46,33 @@ public class GuessActivity extends Activity implements View.OnClickListener{
 
         txtPlayerName.setText(StatusHelper.playerName);
         txtHint.setText(StatusHelper.currentHint);
+    }
+
+    public void habilitarElementos(boolean estado){
+
+        setearElementos(layoutGuess, estado);
+    }
+
+    public void setearElementos(ViewGroup layout, boolean estado){
+
+        layout.setEnabled(estado);
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                setearElementos((ViewGroup) child, estado);
+            } else {
+
+                child.setEnabled(estado);
+
+                /*if(!estado){
+                    if(child instanceof Button)
+                        ((Button)child).getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                }else{
+                    if(child instanceof Button)
+                        ((Button)child).getBackground().setColorFilter(null);
+                }*/
+            }
+        }
     }
 
     public void actualizarPista(){
@@ -56,16 +89,10 @@ public class GuessActivity extends Activity implements View.OnClickListener{
         if(word.length()<0)
             return;
 
-        ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.guessWord(word), new ResponseListener<Object>() {
-            @Override
-            public void onSuccess(Object object) {
-                //Do something (or not...)
-            }
-            @Override
-            public void onError(ServiceCommandError error) {
-
-            }
-        });
+        if(word.equals(StatusHelper.word))
+            ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.guessWord(true, ""), null);
+        else
+            ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.guessWord(false, word), null);
     }
 
 }

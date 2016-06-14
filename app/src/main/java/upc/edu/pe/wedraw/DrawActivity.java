@@ -34,6 +34,7 @@ import upc.edu.pe.wedraw.helpers.WedrawUtils;
 
 public class DrawActivity extends AppCompatActivity implements SensorEventListener{
 
+    private ViewGroup layoutDraw;
     DrawingView drawingView;
     Button mSelectedColor;
     TextView txtWord;
@@ -47,6 +48,7 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_draw);
         ConnectionHelper.sDesaplgListener.setDrawActivity(this);
 
+        layoutDraw = (ViewGroup) findViewById(R.id.layoutDraw);
         txtWord = (TextView) findViewById(R.id.txtWord);
         txtWord.setText(StatusHelper.word);
         drawingView = (DrawingView) findViewById(R.id.drawingView);
@@ -86,18 +88,36 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
         drawingView.setLayoutParams(params);
     }
 
+    public void habilitarElementos(boolean estado){
+
+        setearElementos(layoutDraw, estado);
+    }
+
+    public void setearElementos(ViewGroup layout, boolean estado){
+
+        layout.setEnabled(estado);
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                setearElementos((ViewGroup) child, estado);
+            } else
+                child.setEnabled(estado);
+        }
+    }
+
     /**
      * Cambia el color de la linea que se pinta en la pizarra. Ocurre cuando se le da click a cualquiera de los  botones para cambiar color
      * @param v Boton al cual se le dio click
      */
     public void colorClicked(View v) {
         int colorId;
+        String color = "";
         switch (v.getId()){
-            case R.id.buttonBlack:  colorId = R.color.paint_black;  break;
-            case R.id.buttonBlue:  colorId = R.color.paint_blue;  break;
-            case R.id.buttonGreen:  colorId = R.color.paint_green;  break;
-            case R.id.buttonRed:  colorId = R.color.paint_red;  break;
-            case R.id.buttonYellow:  colorId = R.color.paint_yellow;  break;
+            case R.id.buttonBlack:  colorId = R.color.paint_black; color = "black"; break;
+            case R.id.buttonBlue:  colorId = R.color.paint_blue; color = "blue"; break;
+            case R.id.buttonGreen:  colorId = R.color.paint_green; color = "green"; break;
+            case R.id.buttonRed:  colorId = R.color.paint_red; color = "red"; break;
+            case R.id.buttonYellow:  colorId = R.color.paint_yellow; color = "yellow"; break;
             default: colorId=R.color.paint_black;
         }
 
@@ -107,8 +127,9 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
         mSelectedColor = (Button) v;
         mSelectedColor.setAlpha(0.5f);
 
-        drawingView.setColor(ContextCompat.getColor(this,colorId));
+        drawingView.setColor(ContextCompat.getColor(this, colorId));
 
+        ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.changeColor(color), null);
     }
 
     //<editor-fold desc="Sensor managing detector">
@@ -179,19 +200,19 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
                 countNeg++;
             if((countPos>=2 && countNeg>1) || (countPos>=1 && countNeg>2)){
                 countPos = countNeg = 0;
-                ((DrawingView) findViewById(R.id.drawingView)).clearDrawing();
 
-                        /*ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.requestGameStart(), new ResponseListener<Object>() {
+                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.eraseDraw(), new ResponseListener<Object>() {
 
-                            @Override
-                            public void onError(ServiceCommandError error) {
+                    @Override
+                    public void onError(ServiceCommandError error) {
 
-                            }
-                            @Override
-                            public void onSuccess(Object object) {
+                    }
+                    @Override
+                    public void onSuccess(Object object) {
 
-                            }
-                        });*/
+                        ((DrawingView) findViewById(R.id.drawingView)).clearDrawing();
+                    }
+                });
             }
         }
     }
@@ -227,7 +248,19 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
                     mTask = null;
                 else
                     mTask.cancel(true);
-                ((DrawingView) findViewById(R.id.drawingView)).clearDrawing();
+                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.eraseDraw(), new ResponseListener<Object>() {
+
+                    @Override
+                    public void onError(ServiceCommandError error) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Object object) {
+
+                        ((DrawingView) findViewById(R.id.drawingView)).clearDrawing();
+                    }
+                });
             }
         }
     }

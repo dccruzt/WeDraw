@@ -56,6 +56,20 @@ public class JsonHelper {
         }
     }
 
+    public static JSONObject eraseDraw(){
+        return getDefaultAction(StringsHelper.ERASE_DRAW);
+    }
+
+    public static JSONObject changeColor(String color){
+
+        try {
+            JSONObject jsonObject = getDefaultAction(StringsHelper.CHANGE_COLOR);
+            jsonObject.put(StringsHelper.RESULT, color);
+            return jsonObject;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 
     //<editor-fold desc="Para enviar la dificultad escogida por el usuario">
 
@@ -92,10 +106,13 @@ public class JsonHelper {
 
     //</editor-fold>
 
-    public static JSONObject guessWord(String word){
+    public static JSONObject guessWord(boolean guess, String word){
         JSONObject action= getDefaultAction(StringsHelper.GUESS_WORD);
         try {
-            action.put(StringsHelper.WORD,word);
+            JSONObject obj = new JSONObject();
+            obj.put("guess", guess);
+            obj.put("word", word);
+            action.put(StringsHelper.RESULT, obj);
             return action;
         } catch (JSONException e) {}
         return action;
