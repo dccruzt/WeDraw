@@ -38,7 +38,7 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
     DrawingView drawingView;
     Button mSelectedColor;
     TextView txtWord;
-    private double ASPECT_RATIO = 1.61;
+    private double ASPECT_RATIO = 1.71;
     //private double mAspectRatio = 827 / 1332;// 1332 / 827; //width / height
 
     @Override
@@ -72,17 +72,30 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
         Log.i("WEDRAW","aspect radio: " + ASPECT_RATIO);
         Log.i("WEDRAW", "H: " + maxHeight + " W: " + maxWidth);
         ViewGroup.LayoutParams params = drawingView.getLayoutParams();
+        //Use fixed width
+        int expectedHeightIfFixedWidth = (int) (maxWidth / ASPECT_RATIO);
+        params.width = maxWidth;
+        params.height = expectedHeightIfFixedWidth;
+        //Use fixed height
+        int expectedWidthIfFixedHeight = (int) (maxHeight * ASPECT_RATIO);
+        params.height = maxHeight;
+        params.width = expectedWidthIfFixedHeight;
         if(ASPECT_RATIO>1){
-            //Use fixed width
-            int expectedHeightIfFixedWidth = (int) (maxWidth / ASPECT_RATIO);
-            params.width = maxWidth;
-            params.height = expectedHeightIfFixedWidth;
-
+            if(expectedHeightIfFixedWidth>maxHeight){
+                params.width = expectedWidthIfFixedHeight;
+                params.height = maxHeight;
+            }else{
+                params.width = maxWidth;
+                params.height = expectedHeightIfFixedWidth;
+            }
         }else{
-            //Use fixed height
-            int expectedWidthIfFixedHeight = (int) (maxHeight * ASPECT_RATIO);
-            params.height = maxHeight;
-            params.width = expectedWidthIfFixedHeight;
+            if(expectedWidthIfFixedHeight>maxWidth){
+                params.height = expectedHeightIfFixedWidth;
+                params.width = maxWidth;
+            }else{
+                params.width = expectedWidthIfFixedHeight;
+                params.height = maxHeight;
+            }
         }
         Log.i("WEDRAW","Param H: " + params.height + " W: " + params.width);
         drawingView.setLayoutParams(params);

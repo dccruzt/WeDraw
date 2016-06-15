@@ -140,6 +140,11 @@ public class DrawingView extends View {
         mPath.reset();
     }
 
+
+    private void drawPoint(float x, float y){
+        mCanvas.drawPoint(x,y,mPaint);
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
@@ -149,7 +154,8 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_DOWN:
                 if(isDrawableSpot(x,y)) {
                     touch_start(x, y);
-                    ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.setPosition(Math.round(x), Math.round(y)), null);
+                    mCanvas.drawPoint(x,y,mPaint);
+                    //ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.setPosition(Math.round(x), Math.round(y)), null);
                     invalidate();
                 }
                 break;
@@ -160,7 +166,7 @@ public class DrawingView extends View {
                 touch_move(x, y);
                 touch_up();
                 touch_start(x,y);
-                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(Math.round(x),Math.round(y)), null);
+                //ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(Math.round(x),Math.round(y)), null);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
