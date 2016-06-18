@@ -6,5 +6,8 @@
             <enum name="BIKO" value="1"/>
             <enum name="CHALK" value="2"/>
         </attr>
+        <attr name="customTypeface" format="string" />
     </declare-styleable>
+
+
 </resources>

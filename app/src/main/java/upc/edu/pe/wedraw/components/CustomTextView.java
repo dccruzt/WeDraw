@@ -1,10 +1,14 @@
 package upc.edu.pe.wedraw.components;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
+import upc.edu.pe.wedraw.R;
 import upc.edu.pe.wedraw.helpers.FontHelper;
 import upc.edu.pe.wedraw.interfaces.Typefaceable;
 
@@ -27,6 +31,23 @@ public class CustomTextView extends TextView implements Typefaceable {
 
     public CustomTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+
+        if(attrs!=null){
+            final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.FontAttributes);
+            if (array != null)
+            {
+                final String typefaceAssetPath = array.getString(
+                        R.styleable.FontAttributes_customTypeface);
+                if (typefaceAssetPath != null)
+                {
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(), typefaceAssetPath));
+                    array.recycle();
+                    return;
+                }
+            }
+        }
+
         this.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/international_playboy.ttf"));
         //init(context,attrs);
     }

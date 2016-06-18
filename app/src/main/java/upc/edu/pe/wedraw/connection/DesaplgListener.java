@@ -1,6 +1,8 @@
 package upc.edu.pe.wedraw.connection;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
 
 import com.connectsdk.core.JSONDeserializable;
 import com.connectsdk.service.sessions.WebAppSession;
@@ -17,6 +19,7 @@ import java.util.List;
 import upc.edu.pe.wedraw.ConnectActivity;
 import upc.edu.pe.wedraw.CountdownActivity;
 import upc.edu.pe.wedraw.DifficultyActivity;
+import upc.edu.pe.wedraw.FinishActivity;
 import upc.edu.pe.wedraw.GuessActivity;
 import upc.edu.pe.wedraw.DrawActivity;
 import upc.edu.pe.wedraw.InputNameActivity;
@@ -52,6 +55,7 @@ public class DesaplgListener implements WebAppSessionListener{
     private DifficultyActivity mDifficultyActivity;
     private TurnHintActivity mTurnActivity;
     private CountdownActivity mCountdownActivity;
+    private FinishActivity mFinishActivity;
 
     public SplashActivity getSplashActivity() {
         return mSplashActivity;
@@ -134,6 +138,15 @@ public class DesaplgListener implements WebAppSessionListener{
         mDrawActivity = drawActivity;
     }
 
+    public FinishActivity getFinishActivity() {
+        return mFinishActivity;
+    }
+
+    public void setFinishActivity(FinishActivity finishActivity) {
+        mFinishActivity = finishActivity;
+    }
+
+
     @Override
     public void onReceiveMessage(WebAppSession webAppSession, Object message) {
         try{
@@ -149,15 +162,14 @@ public class DesaplgListener implements WebAppSessionListener{
                 validarRol(json.getBoolean(StringsHelper.RESULT));
             }else if(accion.equals(StringsHelper.START_TURN)){
                 empezarTurno(json.getString(StringsHelper.RESULT));
+            } else if(accion.equals(StringsHelper.GET_HINT)){
+                parsearPalabra(json);
             }else if(accion.equals(StringsHelper.END_TURN)){
                 terminarTurno();
+            }else if (accion.equals(StringsHelper.GAME_WINNER)) {
+                ganadorJuego(json.getJSONArray("resultado"));
             }
 
-
-
-            else if(accion.equals(StringsHelper.GET_HINT)){
-                parsearPalabra(json);
-            }
 
         }catch (Exception e){
 
@@ -199,10 +211,14 @@ public class DesaplgListener implements WebAppSessionListener{
     public void empezarTurno(String palabra){
 
         StatusHelper.word = palabra;
+        String hint = "";
+        for (int i=0;i<palabra.length();i++)
+            hint = hint.concat("_");
+        StatusHelper.currentHint = hint;
+
         if(StatusHelper.isMyTurnToDraw){
 
             if (getDifficultyActivity() != null){
-
                 Intent i = new Intent(getDifficultyActivity(), CountdownActivity.class);
                 getDifficultyActivity().startActivity(i);
                 getDifficultyActivity().finish();
@@ -237,26 +253,38 @@ public class DesaplgListener implements WebAppSessionListener{
 
 
     public void parsearPalabra(JSONObject response) throws JSONException{
-        if(getGuessActivity()==null)
-            return;
-        if(getStartGameActivity()!=null){
-            Intent i = new Intent(getStartGameActivity(),GuessActivity.class);
-            i.putExtra(GuessActivity.PARAM_HINT, response.getString("pista"));
-            getStartGameActivity().startActivity(i);
+        if(getGuessActivity()!=null) {
+            StatusHelper.currentHint = response.getString("pista");
+            getGuessActivity().actualizarPista();
         }
-        /*JSONArray hint = response.getJSONArray("pista");
-        List<String> listOfCharacters = new ArrayList<>();
-        for(int i=0;i<hint.length();i++){
-            String value = (String) hint.get(0);
-            listOfCharacters.add(value);
-        }
-        String[] arr = listOfCharacters.toArray(new String[listOfCharacters.size()]);
-        if(getStartGameActivity()!=null){
-            Intent i = new Intent(getStartGameActivity(),GuessActivity.class);
-            i.putExtra(GuessActivity.PARAM_HINT,arr);
-            getStartGameActivity().startActivity(i);
-        }*/
     }
+
+    public void ganadorJuego(JSONArray ganadores) throws JSONException{
+
+        String lblFinal = "";
+        String nombres = "";
+
+        for (int i = 0; i < ganadores.length(); i++)
+            if(i > 0)
+                nombres += " Y " + ganadores.getString(i);
+            else
+                nombres = ganadores.getString(i);
+
+
+        if(ganadores.length() > 1)
+            lblFinal = "¡FELICITACIONES A " + nombres + "!\n¡SON LOS GANADORES DE TIE-A-WORD!";
+        else
+            lblFinal = "¡FELICITACIONES A " + nombres + "!\n¡ES EL GANADOR DE TIE-A-WORD!";
+
+
+        Activity activity = StatusHelper.isMyTurnToDraw ? getDrawActivity() : getGuessActivity();
+        Intent i = new Intent(activity, FinishActivity.class);
+        i.putExtra(FinishActivity.PARAM_MESSAGE, lblFinal);
+        activity.startActivity(i);
+        activity.finish();
+
+    }
+
 
     @Override
     public void onWebAppSessionDisconnect(WebAppSession webAppSession) {

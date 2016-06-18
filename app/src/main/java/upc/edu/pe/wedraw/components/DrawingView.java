@@ -40,7 +40,6 @@ public class DrawingView extends View {
     private Bitmap mBackground;
     private int drawableSpotColor;
     private List<Integer> mNotAllowedColors;
-
     public DrawingView(Context c, AttributeSet attrs){
         super(c,attrs);
         init(c);
@@ -147,6 +146,9 @@ public class DrawingView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(!isEnabled())
+            return true;
+
         float x = event.getX();
         float y = event.getY();
 
@@ -155,7 +157,7 @@ public class DrawingView extends View {
                 if(isDrawableSpot(x,y)) {
                     touch_start(x, y);
                     mCanvas.drawPoint(x,y,mPaint);
-                    //ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.setPosition(Math.round(x), Math.round(y)), null);
+                    ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.setPosition(Math.round(x) / getWidth(), Math.round(y) / getHeight()), null);
                     invalidate();
                 }
                 break;
@@ -166,7 +168,7 @@ public class DrawingView extends View {
                 touch_move(x, y);
                 touch_up();
                 touch_start(x,y);
-                //ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(Math.round(x),Math.round(y)), null);
+                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(Math.round(x) / getWidth(),Math.round(y) / getHeight()), null);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:

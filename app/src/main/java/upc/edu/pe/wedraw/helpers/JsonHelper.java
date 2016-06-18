@@ -34,7 +34,7 @@ public class JsonHelper {
         return getDefaultAction(StringsHelper.REQUEST_START);
     }
 
-    public static JSONObject makeDraw(int x, int y){
+    public static JSONObject makeDraw(double x, double y){
         try {
             JSONObject jsonObject = getDefaultAction(StringsHelper.MAKE_DRAW);
             jsonObject.put("x", x);
@@ -116,6 +116,26 @@ public class JsonHelper {
             return action;
         } catch (JSONException e) {}
         return action;
+    }
+
+    public static JSONObject close(){
+        JSONObject json = getDefaultAction(StringsHelper.FINISH_GAME);
+        try {
+            json.put(StringsHelper.RESULT,"");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    public static JSONObject playAgain(){
+        JSONObject json = getDefaultAction(StringsHelper.PLAY_AGAIN);
+        try {
+            json.put(StringsHelper.RESULT,"");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 
 

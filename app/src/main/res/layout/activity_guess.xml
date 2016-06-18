@@ -44,18 +44,20 @@
     </RelativeLayout>
 
 
-    <TextView
+    <upc.edu.pe.wedraw.components.CustomTextView
         android:id="@+id/txtHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="__________"
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:background="@drawable/palabra"
+        app:customTypeface="fonts/VTCAllSkratchedUpOne.ttf"
         android:padding="16dp"/>
 
-    <EditText
+    <upc.edu.pe.wedraw.components.CustomEditText
         android:id="@+id/activity_guess_word"
         android:layout_width="@dimen/input_width"
         android:layout_height="wrap_content"

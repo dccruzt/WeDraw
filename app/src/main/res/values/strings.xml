@@ -15,6 +15,10 @@
 
     <!-- Input name activity -->
     <string name="textbox_conectar">NOMBRE JUGADOR</string>
+    
+    <!-- Finish activity -->
+    <string name="boton_salir">Salir</string>
+    <string name="boton_volver">Volver a jugar</string>
 
 
 </resources>

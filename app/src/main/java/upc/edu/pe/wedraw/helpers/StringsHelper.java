@@ -28,6 +28,8 @@ public class StringsHelper {
     public static final String ERASE_DRAW = "borrarDibujo";
     public static final String GUESS_WORD = "enviarIntento";
     public static final String CHANGE_COLOR = "cambiarColor";
+    public static final String FINISH_GAME = "salir";
+    public static final String PLAY_AGAIN = "volverAjugar";
 
 
     public static final String DISCONNECT_PLAYER = "desconectarJugador";
@@ -37,9 +39,10 @@ public class StringsHelper {
     public static final String ENABLE_START = "puedeIniciar";
     public static final String IS_DRAWER = "esDibujante";
     public static final String START_TURN = "empezarTurno";
-    public static final String END_TURN = "terminarTurno";
-
-
     public static final String GET_HINT = "enviarPista";
+    public static final String END_TURN = "terminarTurno";
+    public static final String GAME_WINNER = "ganadorJuego";
+
+
 
 }

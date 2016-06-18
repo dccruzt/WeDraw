@@ -5,7 +5,10 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +19,9 @@ import android.widget.Toast;
 import com.connectsdk.service.capability.listeners.ResponseListener;
 import com.connectsdk.service.command.ServiceCommandError;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
@@ -30,12 +36,20 @@ public class GuessActivity extends Activity implements View.OnClickListener{
     Button butGuess;
     TextView txtPlayerName,txtHint;
 
-    public static final String PARAM_HINT = "param_hint";
+    int c=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guess);
+
+        //Si quieren hacer pruebas pueden descomentar estoy y el método de abajo
+        /*StatusHelper.word = "long long long word";
+        String hint = "";
+        for (int i=0;i<StatusHelper.word.length();i++)
+            hint = hint.concat("_");
+        StatusHelper.currentHint = hint;
+        testUpdateHint();*/
 
         layoutGuess = (ViewGroup) findViewById(R.id.layoutGuess);
         eteWord = (EditText) findViewById(R.id.activity_guess_word);
@@ -46,7 +60,29 @@ public class GuessActivity extends Activity implements View.OnClickListener{
 
         txtPlayerName.setText(StatusHelper.playerName);
         txtHint.setText(StatusHelper.currentHint);
+
     }
+
+    /*private static final ScheduledExecutorService worker =
+            Executors.newSingleThreadScheduledExecutor();
+    private void testUpdateHint(){
+        if(c>= StatusHelper.word.length())
+            return;
+        c++;
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String hint = "";
+                for(int i=0;i<StatusHelper.word.length();i++)
+                    hint = hint.concat( i<c ? String.valueOf(StatusHelper.word.charAt(i)) : "_" );
+                StatusHelper.currentHint = hint;
+                actualizarPista();
+                testUpdateHint();
+            }
+        }, 2000);
+    }*/
+
 
     public void habilitarElementos(boolean estado){
 
