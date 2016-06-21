@@ -45,7 +45,7 @@ public class JsonHelper {
         }
     }
 
-    public static JSONObject setPosition(int x, int y){
+    public static JSONObject setPosition(double x, double y){
         try {
             JSONObject jsonObject = getDefaultAction(StringsHelper.SET_POSITION);
             jsonObject.put("x", x);

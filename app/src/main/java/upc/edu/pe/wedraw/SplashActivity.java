@@ -36,8 +36,8 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this, FinishActivity.class);
-                i.putExtra(FinishActivity.PARAM_MESSAGE, "¡FELICITACIONES A " + "DANIELA" + "!\n¡ES EL GANADOR DE TIE-A-WORD!");
+                Intent i = new Intent(SplashActivity.this, ConnectActivity.class);
+                //i.putExtra(FinishActivity.PARAM_MESSAGE, "¡FELICITACIONES A " + "DANIELA" + "!\n¡ES EL GANADOR DE TIE-A-WORD!");
                 SplashActivity.this.startActivity(i);
                 SplashActivity.this.finish();
             }

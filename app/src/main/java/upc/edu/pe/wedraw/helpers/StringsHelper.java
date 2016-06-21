@@ -42,7 +42,4 @@ public class StringsHelper {
     public static final String GET_HINT = "enviarPista";
     public static final String END_TURN = "terminarTurno";
     public static final String GAME_WINNER = "ganadorJuego";
-
-
-
 }

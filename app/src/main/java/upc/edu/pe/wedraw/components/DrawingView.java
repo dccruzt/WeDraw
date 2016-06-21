@@ -157,7 +157,7 @@ public class DrawingView extends View {
                 if(isDrawableSpot(x,y)) {
                     touch_start(x, y);
                     mCanvas.drawPoint(x,y,mPaint);
-                    ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.setPosition(Math.round(x) / getWidth(), Math.round(y) / getHeight()), null);
+                    ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.setPosition(x * 1.0 / getWidth(), y * 1.0 / getHeight()), null);
                     invalidate();
                 }
                 break;
@@ -168,7 +168,7 @@ public class DrawingView extends View {
                 touch_move(x, y);
                 touch_up();
                 touch_start(x,y);
-                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(Math.round(x) / getWidth(),Math.round(y) / getHeight()), null);
+                ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.makeDraw(x * 1.0 / getWidth(), y * 1.0 / getHeight()), null);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:

@@ -163,11 +163,11 @@ public class DesaplgListener implements WebAppSessionListener{
             }else if(accion.equals(StringsHelper.START_TURN)){
                 empezarTurno(json.getString(StringsHelper.RESULT));
             } else if(accion.equals(StringsHelper.GET_HINT)){
-                parsearPalabra(json);
+                parsearPalabra(json.getString(StringsHelper.RESULT));
             }else if(accion.equals(StringsHelper.END_TURN)){
                 terminarTurno();
             }else if (accion.equals(StringsHelper.GAME_WINNER)) {
-                ganadorJuego(json.getJSONArray("resultado"));
+                ganadorJuego(json.getJSONArray(StringsHelper.RESULT));
             }
 
 
@@ -252,9 +252,11 @@ public class DesaplgListener implements WebAppSessionListener{
     }
 
 
-    public void parsearPalabra(JSONObject response) throws JSONException{
-        if(getGuessActivity()!=null) {
-            StatusHelper.currentHint = response.getString("pista");
+    public void parsearPalabra(String response) {
+
+        if(getGuessActivity() != null) {
+
+            StatusHelper.currentHint = response;
             getGuessActivity().actualizarPista();
         }
     }

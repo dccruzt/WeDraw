@@ -42,6 +42,7 @@ public class GuessActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guess);
+        ConnectionHelper.sDesaplgListener.setGuessActivity(this);
 
         //Si quieren hacer pruebas pueden descomentar estoy y el método de abajo
         /*StatusHelper.word = "long long long word";
@@ -121,7 +122,7 @@ public class GuessActivity extends Activity implements View.OnClickListener{
      */
     @Override
     public void onClick(View v) {
-        String word = eteWord.getText().toString().trim();
+        String word = eteWord.getText().toString().trim().toLowerCase();
         if(word.length()<0)
             return;
 
