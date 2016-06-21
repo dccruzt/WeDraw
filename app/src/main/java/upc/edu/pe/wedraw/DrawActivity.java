@@ -37,7 +37,7 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
     private ViewGroup layoutDraw;
     DrawingView drawingView;
     Button mSelectedColor;
-    TextView txtWord;
+    TextView txtWord,txtPlayerName;
     private double ASPECT_RATIO = 1.71;
     //private double mAspectRatio = 827 / 1332;// 1332 / 827; //width / height
 
@@ -50,6 +50,8 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
 
         layoutDraw = (ViewGroup) findViewById(R.id.layoutDraw);
         txtWord = (TextView) findViewById(R.id.txtWord);
+        txtPlayerName = (TextView) findViewById(R.id.txtPlayerName);
+        txtPlayerName.setText(StatusHelper.playerName);
         txtWord.setText(StatusHelper.word);
         drawingView = (DrawingView) findViewById(R.id.drawingView);
         drawingView.post(new Runnable() {
@@ -100,7 +102,6 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void habilitarElementos(boolean estado){
-
         setearElementos(layoutDraw, estado);
     }
 
@@ -129,6 +130,7 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
             case R.id.buttonGreen:  colorId = R.color.paint_green; color = "green"; break;
             case R.id.buttonRed:  colorId = R.color.paint_red; color = "red"; break;
             case R.id.buttonYellow:  colorId = R.color.paint_yellow; color = "yellow"; break;
+            case R.id.buttonErase:  colorId = R.color.paint_eraser; color = "white"; break;
             default: colorId=R.color.paint_black;
         }
 
@@ -300,4 +302,6 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
             mSensorManager.unregisterListener(this);
     }
     //</editor-fold>
+    @Override
+    public void onBackPressed() {}
 }

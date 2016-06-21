@@ -43,7 +43,6 @@
 
     </RelativeLayout>
 
-
     <upc.edu.pe.wedraw.components.CustomTextView
         android:id="@+id/txtHint"
         android:layout_width="wrap_content"
@@ -55,6 +54,7 @@
         android:textSize="32sp"
         android:background="@drawable/palabra"
         app:customTypeface="fonts/VTCAllSkratchedUpOne.ttf"
+        android:layout_marginTop="@dimen/guess_edit_top_margin"
         android:padding="16dp"/>
 
     <upc.edu.pe.wedraw.components.CustomEditText
@@ -67,16 +67,13 @@
         android:background="@drawable/palabraescrita"
         android:textColor="@color/white"
         tools:text="Name"
-        android:layout_margin="16dp"
+        android:layout_margin="24dp"
         android:layout_gravity="center_horizontal"/>
 
-    <Button
+    <upc.edu.pe.wedraw.components.CustomButton
         android:id="@+id/activity_guess_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/button_padding"
-        android:background="@drawable/states_guess_button"
-        android:textSize="@dimen/button_text_size_normal"
+        style="@style/BaseButton"
+        android:text="Adivinar"
         android:layout_gravity="center_horizontal" />
 
 

@@ -6,21 +6,79 @@
     <dimen name="logo_size_normal">200dp</dimen>
     <dimen name="logo_size_small">160dp</dimen>
     <dimen name="option_button">80dp</dimen>
-    <dimen name="text_size_normal">64dp</dimen>
+    <dimen name="text_size_normal">54sp</dimen>
     <dimen name="button_text_size_normal">32dp</dimen>
-    <dimen name="input_width">350dp</dimen>
+    <dimen name="input_width">380dp</dimen>
     <dimen name="text_item_height">60dp</dimen>
     <dimen name="text_item_size">32dp</dimen>
-    <dimen name="button_padding">32dp</dimen>
+    <dimen name="button_padding">12dp</dimen>
     <dimen name="text_margin">24dp</dimen>
     <dimen name="connect_button">256dp</dimen>
     <dimen name="connect_button_text_size">48dp</dimen>
 
+
+    <dimen name="button_height">60dp</dimen>
+    <dimen name="button_width">420dp</dimen>
+    <dimen name="button_text_size">28sp</dimen>
+
+    <!--Seleccionar tv activity -->
+    <dimen name="tv_picker_height">60dp</dimen>
+
+    <!--StartGameActivity-->
+    <dimen name="name_area_margin">36dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="max_name_width">1200dp</dimen>
+    <dimen name="base_name_height">72dp</dimen>
+
+    <!-- Difficulty picker activity -->
+    <dimen name="difficulty_hint_lateral_margin">36dp</dimen>
+    <dimen name="difficulty_hint_top_margin">40dp</dimen>
+    <dimen name="difficulty_hint_text_size">24sp</dimen>
+    <dimen name="difficulty_buttons_top_margin">40dp</dimen>
+    <dimen name="difficulty_button_width">160dp</dimen>
+    <dimen name="difficulty_button_height">80dp</dimen>
+    <dimen name="difficulty_button_margin">12dp</dimen>
+
+    <!-- Draw image activity -->
+    <dimen name="color_picker_size">80dp</dimen>
+
+    <dimen name="eraser_height">70dp</dimen>
+    <dimen name="eraser_width">84dp</dimen>
+    <dimen name="colors_margin">14dp</dimen>
+
+    <!-- Guess activity -->
+    <dimen name="guess_edit_top_margin">36dp</dimen>
+
+    <!-- Turn hint activity -->
+    <dimen name="turn_hint_activity_image_width">300dp</dimen>
+    <dimen name="turn_hint_activity_image_height">120dp</dimen>
+    <dimen name="turn_hint_activity_image_margin">36dp</dimen>
+
+    <!-- Countdown activity-->
+    <dimen name="countdown_activity_image_size">120dp</dimen>
+
+
+
     <!-- Loading activity -->
     <dimen name="cargando_punto_size">20dp</dimen>
-    <dimen name="cargando_punto_marginRight">20dp</dimen>
-    <dimen name="cargando_punto_marginTop">30dp</dimen>
-    <dimen name="cargando_letra_marginTop">20dp</dimen>
-    <dimen name="inicio_letra">40dp</dimen>
+    <dimen name="cargando_punto_marginRight">16dp</dimen>
+    <dimen name="cargando_punto_marginTop">15dp</dimen>
+    <dimen name="cargando_letra_marginTop">30dp</dimen>
+    <dimen name="inicio_letra">48dp</dimen>
+
+
+    <!-- Finish activity -->
+    <dimen name="inicio_logo_size">120dp</dimen>
+
+    <dimen name="inicio_caja_padding">6dp</dimen>
+    <dimen name="inicio_caja_ancho">240dp</dimen>
+    <dimen name="inicio_caja_alto">60dp</dimen>
+    <dimen name="inicio_boton_alto">37dp</dimen>
+
+    <dimen name="finalJuego_trofeo_ancho">220dp</dimen>
+    <dimen name="finalJuego_trofeo_alto">220dp</dimen>
+    <dimen name="juego_boton_letra">22sp</dimen>
+
+    <dimen name="trophy_image_bottom_margin">48dp</dimen>
 
 </resources>

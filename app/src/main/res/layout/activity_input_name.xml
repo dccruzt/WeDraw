@@ -71,13 +71,11 @@
         android:hint="@string/textbox_conectar"
         android:maxLength="15"/>
 
-    <Button
+    <upc.edu.pe.wedraw.components.CustomButton
         android:id="@+id/activity_input_name_button"
-        android:layout_width="@dimen/input_width"
-        android:layout_height="54dp"
-        android:background="@drawable/conectar"
-        android:padding="@dimen/button_padding"
-        android:textSize="@dimen/button_text_size_normal"
+        style="@style/BaseButton"
+        android:text="Conectar"
+        android:layout_margin="12dp"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

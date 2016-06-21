@@ -132,5 +132,7 @@ public class GuessActivity extends Activity implements View.OnClickListener{
         else
             ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.guessWord(false, word), null);
     }
+    @Override
+    public void onBackPressed() {}
 
 }

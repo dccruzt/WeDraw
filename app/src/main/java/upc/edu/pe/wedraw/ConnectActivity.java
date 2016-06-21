@@ -194,5 +194,7 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {}
 
 }

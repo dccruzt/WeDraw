@@ -37,9 +37,11 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 Intent i = new Intent(SplashActivity.this, ConnectActivity.class);
+                startActivity(i);
+                /*Intent i = new Intent(SplashActivity.this, ConnectActivity.class);
                 //i.putExtra(FinishActivity.PARAM_MESSAGE, "¡FELICITACIONES A " + "DANIELA" + "!\n¡ES EL GANADOR DE TIE-A-WORD!");
                 SplashActivity.this.startActivity(i);
-                SplashActivity.this.finish();
+                SplashActivity.this.finish();*/
             }
         }, SPLASH_DISPLAY_TIME);
     }

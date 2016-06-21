@@ -52,4 +52,6 @@ public class CountdownActivity extends Activity {
             }
         }, INTERVAL);
     }
+    @Override
+    public void onBackPressed() {}
 }

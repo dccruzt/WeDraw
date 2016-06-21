@@ -82,15 +82,11 @@ public class DifficultyActivity extends SensorActivity implements View.OnClickLi
                 buttonEasy.setEnabled(v.getId()==R.id.buttonEasy);
                 buttonMedium.setEnabled(v.getId()==R.id.buttonMedium);
                 buttonHard.setEnabled(v.getId()==R.id.buttonHard);
-                Toast.makeText(DifficultyActivity.this,"DOWN",Toast.LENGTH_SHORT).show();
             }
             else if (event.getAction() == MotionEvent.ACTION_UP){
                 buttonEasy.setEnabled(true);
                 buttonMedium.setEnabled(true);
                 buttonHard.setEnabled(true);
-                Toast.makeText(DifficultyActivity.this,"UP",Toast.LENGTH_SHORT).show();
-            }else if (event.getAction() == MotionEvent.ACTION_CANCEL){
-                Toast.makeText(DifficultyActivity.this,"RELEASED",Toast.LENGTH_SHORT).show();
             }
             return false;
         }
@@ -147,4 +143,6 @@ public class DifficultyActivity extends SensorActivity implements View.OnClickLi
         }
     }
     //</editor-fold>
+    @Override
+    public void onBackPressed() {}
 }

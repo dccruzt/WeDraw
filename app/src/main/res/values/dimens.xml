@@ -9,7 +9,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="text_size_normal">32dp</dimen>
     <dimen name="button_text_size_normal">16dp</dimen>
-    <dimen name="input_width">180dp</dimen>
+    <dimen name="input_width">220dp</dimen>
     <dimen name="text_item_height">40dp</dimen>
     <dimen name="text_item_size">24dp</dimen>
     <dimen name="button_padding">8dp</dimen>
@@ -17,6 +17,10 @@
     <dimen name="text_margin">8dp</dimen>
     <dimen name="connect_button">128dp</dimen>
     <dimen name="connect_button_text_size">24dp</dimen>
+
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_width">300dp</dimen>
+    <dimen name="button_text_size">22sp</dimen>
 
     <!--Seleccionar tv activity -->
     <dimen name="tv_picker_height">60dp</dimen>
@@ -38,6 +42,9 @@
 
     <!-- Draw image activity -->
     <dimen name="color_picker_size">40dp</dimen>
+    <dimen name="eraser_height">54dp</dimen>
+    <dimen name="eraser_width">35dp</dimen>
+    <dimen name="colors_margin">4dp</dimen>
 
     <!-- Guess activity -->
     <dimen name="guess_edit_top_margin">12dp</dimen>
@@ -68,5 +75,7 @@
     <dimen name="finalJuego_trofeo_ancho">166dp</dimen>
     <dimen name="finalJuego_trofeo_alto">150dp</dimen>
     <dimen name="juego_boton_letra">10sp</dimen>
+
+    <dimen name="trophy_image_bottom_margin">16dp</dimen>
 
 </resources>

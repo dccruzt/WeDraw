@@ -53,9 +53,11 @@
 
             <Button
                 android:id="@+id/buttonErase"
-                android:layout_width="54dp"
-                android:layout_height="35dp"
+                android:layout_width="@dimen/eraser_width"
+                android:layout_height="@dimen/eraser_height"
                 android:layout_marginTop="8dp"
+                android:onClick="colorClicked"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/borrador"/>
             
         </LinearLayout>
@@ -72,8 +74,7 @@
                 android:background="@drawable/nombre">
                 <upc.edu.pe.wedraw.components.CustomTextView
                     android:id="@+id/txtPlayerName"
-                    style="@style/NameTextViewStyle"
-                    android:text="Test"/>
+                    style="@style/NameTextViewStyle" />
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/llaFooter"
@@ -85,8 +86,7 @@
                 android:layout_marginBottom="8dp">
                 <upc.edu.pe.wedraw.components.CustomTextView
                     android:id="@+id/txtWord"
-                    style="@style/NameTextViewStyle"
-                    android:text="Test"/>
+                    style="@style/NameTextViewStyle" />
             </RelativeLayout>
 
             <RelativeLayout

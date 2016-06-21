@@ -82,4 +82,6 @@ public class StartGameActivity extends AppCompatActivity{
             txtHint.setText(getString(R.string.waiting_players));
         }
     }
+    @Override
+    public void onBackPressed() {}
 }

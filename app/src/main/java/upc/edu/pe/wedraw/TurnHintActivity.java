@@ -58,5 +58,7 @@ public class TurnHintActivity extends Activity {
         System.gc();
         super.onDestroy();
     }
+    @Override
+    public void onBackPressed() {}
 
 }
