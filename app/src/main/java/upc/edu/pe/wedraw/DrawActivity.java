@@ -69,8 +69,6 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
     private void resizeToAdjustAspectRatio(){
         int maxHeight = drawingView.getHeight();
         int maxWidth = drawingView.getWidth();
-        Log.i("WEDRAW","aspect radio: " + ASPECT_RATIO);
-        Log.i("WEDRAW", "H: " + maxHeight + " W: " + maxWidth);
         ViewGroup.LayoutParams params = drawingView.getLayoutParams();
         //Use fixed width
         int expectedHeightIfFixedWidth = (int) (maxWidth / ASPECT_RATIO);
@@ -97,7 +95,7 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
                 params.height = maxHeight;
             }
         }
-        Log.i("WEDRAW","Param H: " + params.height + " W: " + params.width);
+
         drawingView.setLayoutParams(params);
     }
 

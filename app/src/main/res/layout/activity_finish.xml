@@ -52,17 +52,17 @@
                 android:layout_height="@dimen/inicio_boton_alto"
                 android:layout_marginRight="50dp"
                 android:onClick="salir"
-                android:background="@drawable/adivinar"
+                android:background="@drawable/default_button_background"
                 android:text="@string/boton_salir"
                 android:textSize="@dimen/juego_boton_letra"
-                android:textColor="#522F18" />
+                android:textColor="#fff" />
 
             <Button
                 android:id="@+id/btnVolver"
                 android:layout_width="@dimen/inicio_caja_ancho"
                 android:layout_height="@dimen/inicio_boton_alto"
                 android:onClick="volverAjugar"
-                android:background="@drawable/adivinar"
+                android:background="@drawable/default_button_background"
                 android:text="@string/boton_volver"
                 android:textSize="@dimen/juego_boton_letra"
                 android:textColor="#522F18" />

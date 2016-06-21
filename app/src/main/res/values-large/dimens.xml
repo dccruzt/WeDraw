@@ -24,4 +24,17 @@
     <dimen name="cargando_letra_marginTop">30dp</dimen>
     <dimen name="inicio_letra">30dp</dimen>
 
+
+    <!-- Finish activity -->
+    <dimen name="inicio_logo_size">80dp</dimen>
+
+    <dimen name="inicio_caja_padding">6dp</dimen>
+    <dimen name="inicio_caja_ancho">140dp</dimen>
+    <dimen name="inicio_caja_alto">30dp</dimen>
+    <dimen name="inicio_boton_alto">37dp</dimen>
+
+    <dimen name="finalJuego_trofeo_ancho">166dp</dimen>
+    <dimen name="finalJuego_trofeo_alto">150dp</dimen>
+    <dimen name="juego_boton_letra">10sp</dimen>
+
 </resources>

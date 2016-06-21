@@ -113,7 +113,8 @@ public class GuessActivity extends Activity implements View.OnClickListener{
     }
 
     public void actualizarPista(){
-        txtHint.setText(StatusHelper.currentHint);
+        String text = StatusHelper.currentHint.replace(" ","   ");
+        txtHint.setText(text);
     }
 
     /**
