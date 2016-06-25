@@ -3,6 +3,7 @@ package upc.edu.pe.wedraw;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -143,7 +144,6 @@ public class ConnectActivity extends AppCompatActivity {
         ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.ConnectTv(), new ResponseListener<Object>() {
             @Override
             public void onSuccess(Object object) {
-
             }
 
             @Override

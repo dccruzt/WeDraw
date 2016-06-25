@@ -50,8 +50,10 @@ public class DrawingView extends View {
         init(c);
     }
 
-    public void initBitmap(){
-        mBackground = WedrawUtils.getBitmapFromView(this);
+    public void initBitmap(int width, int height){
+        mBackground =  WedrawUtils.getBitmapFromView(this);
+        mBackground = Bitmap.createScaledBitmap(mBackground, width, height, false);
+        Log.i("WEDRAW","BTIMAP w:" + mBackground.getWidth() + "  h: " + mBackground.getHeight());
         mNotAllowedColors = new ArrayList<>();
         mNotAllowedColors.add(ContextCompat.getColor(context, R.color.not_drawable_color));
         mNotAllowedColors.add(ContextCompat.getColor(context, R.color.not_drawable_color2));
@@ -85,8 +87,9 @@ public class DrawingView extends View {
         mPaint.setStrokeWidth(12);
     }
 
-    public void setColor(int color){
+    public void setColor(int color, boolean isWhite) {
         mPaint.setColor(color);
+        mPaint.setStrokeWidth( isWhite ? 20 : 12);
     }
 
     @Override
@@ -121,7 +124,8 @@ public class DrawingView extends View {
         float dx = Math.abs(x - mX);
         float dy = Math.abs(y - mY);
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-            mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
+            //mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
+            mPath.lineTo(mX, mY);
             mX = x;
             mY = y;
 
@@ -131,6 +135,7 @@ public class DrawingView extends View {
     }
 
     private void touch_up() {
+        Log.i("WEDRAW","Destiny x: " + mX + "  Y: " + mY);
         mPath.lineTo(mX, mY);
         circlePath.reset();
         // commit the path to our offscreen
@@ -162,6 +167,7 @@ public class DrawingView extends View {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
+                Log.i("WEDRAW","Action move");
                 if(!isDrawableSpot(x,y)){
                     break;
                 }
@@ -172,7 +178,8 @@ public class DrawingView extends View {
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                touch_up();
+                if(isDrawableSpot(x,y))
+                    touch_up();
                 invalidate();
                 break;
         }
@@ -189,6 +196,7 @@ public class DrawingView extends View {
         try {
             int pixel = mBackground.getPixel((int) x, (int) y);
             int G = (pixel >> 8) & 0xff;
+            Log.i("WEDRAW","G: " + G*2);
             return G*2>255;
         }catch (IllegalArgumentException ex){
             return false;

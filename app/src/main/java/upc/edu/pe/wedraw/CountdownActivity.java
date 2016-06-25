@@ -2,6 +2,7 @@ package upc.edu.pe.wedraw;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
@@ -21,6 +22,9 @@ public class CountdownActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
         ConnectionHelper.sDesaplgListener.setCountdownActivity(this);
+
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.conectado);
+        mp.start();
 
         txtCount = (TextView) findViewById(R.id.txtCount);
         count = 3;

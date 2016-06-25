@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,11 +59,11 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void run() {
                 resizeToAdjustAspectRatio();
-                drawingView.initBitmap();
             }
         });
         //Setup sensors to detect shake
         setupSensors();
+
     }
 
     /**
@@ -99,6 +100,7 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
         }
 
         drawingView.setLayoutParams(params);
+        drawingView.initBitmap(params.width,params.height);
     }
 
     public void habilitarElementos(boolean estado){
@@ -124,13 +126,14 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
     public void colorClicked(View v) {
         int colorId;
         String color = "";
+        boolean isWhite = false;
         switch (v.getId()){
             case R.id.buttonBlack:  colorId = R.color.paint_black; color = "black"; break;
             case R.id.buttonBlue:  colorId = R.color.paint_blue; color = "blue"; break;
             case R.id.buttonGreen:  colorId = R.color.paint_green; color = "green"; break;
             case R.id.buttonRed:  colorId = R.color.paint_red; color = "red"; break;
             case R.id.buttonYellow:  colorId = R.color.paint_yellow; color = "yellow"; break;
-            case R.id.buttonErase:  colorId = R.color.paint_eraser; color = "white"; break;
+            case R.id.buttonErase:  colorId = R.color.paint_eraser; color = "white"; isWhite = true; break;
             default: colorId=R.color.paint_black;
         }
 
@@ -140,7 +143,7 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
         mSelectedColor = (Button) v;
         mSelectedColor.setAlpha(0.5f);
 
-        drawingView.setColor(ContextCompat.getColor(this, colorId));
+        drawingView.setColor(ContextCompat.getColor(this, colorId),isWhite);
 
         ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.changeColor(color), null);
     }
@@ -223,6 +226,9 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
                     @Override
                     public void onSuccess(Object object) {
 
+                        MediaPlayer mp = MediaPlayer.create(DrawActivity.this, R.raw.erase_sound);
+                        mp.start();
+
                         ((DrawingView) findViewById(R.id.drawingView)).clearDrawing();
                     }
                 });
@@ -258,8 +264,6 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
                 positiveSpin = false;
                 negativeSpinCount = 0;
                 if(mTask!=null)
-                    mTask = null;
-                else
                     mTask.cancel(true);
                 ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.eraseDraw(), new ResponseListener<Object>() {
 

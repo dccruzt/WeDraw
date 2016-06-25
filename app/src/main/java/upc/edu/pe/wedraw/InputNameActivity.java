@@ -2,6 +2,7 @@ package upc.edu.pe.wedraw;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +52,9 @@ public class InputNameActivity extends Activity{
                         public void onSuccess(Object object) {
                             Toast.makeText(getApplicationContext(), NAME_SUCCESS, Toast.LENGTH_SHORT);
                             StatusHelper.playerName = name;
+                            MediaPlayer mp = MediaPlayer.create(InputNameActivity.this, R.raw.conectado);
+                            mp.start();
+
                             Intent i = new Intent(InputNameActivity.this, StartGameActivity.class);
                             startActivity(i);
                         }
