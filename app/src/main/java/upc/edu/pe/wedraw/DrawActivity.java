@@ -289,6 +289,10 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
     //</editor-fold>
 
     //<editor-fold desc="Register and unregister the sensor listener, to optimize battery usage">
+
+    /**
+     * Se llama cuando se vuelva a mostrar la pantalla de la aplicaicón y se encarga de registrar los sensores para su posterior uso
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -299,6 +303,9 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
         mLastUpdateAccelerometer = mLastUpdateGyro = System.currentTimeMillis();
     }
 
+    /**
+     * Deja de utilizar los sensores cuando se abandona el app
+     */
     @Override
     protected void onPause(){
         super.onPause();

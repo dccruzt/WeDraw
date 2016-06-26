@@ -38,8 +38,6 @@ public class DrawingView extends View {
     private Path circlePath;
     private Paint mPaint;
     private Bitmap mBackground;
-    private int drawableSpotColor;
-    private List<Integer> mNotAllowedColors;
     public DrawingView(Context c, AttributeSet attrs){
         super(c,attrs);
         init(c);
@@ -50,17 +48,21 @@ public class DrawingView extends View {
         init(c);
     }
 
+    /**
+     * Inicializa el bitmap que se utlizará como referencia para la detección de los puntos sobre los cuales se puede dibujar
+     * @param width
+     * @param height
+     */
     public void initBitmap(int width, int height){
         mBackground =  WedrawUtils.getBitmapFromView(this);
         mBackground = Bitmap.createScaledBitmap(mBackground, width, height, false);
-        Log.i("WEDRAW","BTIMAP w:" + mBackground.getWidth() + "  h: " + mBackground.getHeight());
-        mNotAllowedColors = new ArrayList<>();
-        mNotAllowedColors.add(ContextCompat.getColor(context, R.color.not_drawable_color));
-        mNotAllowedColors.add(ContextCompat.getColor(context, R.color.not_drawable_color2));
-        mNotAllowedColors.add(ContextCompat.getColor(context, R.color.not_drawable_color3));
 
     }
 
+    /**
+     * Inicializa los valores del canvas y pincel utilizados para realizar el dibujo
+     * @param c
+     */
     private void init(Context c){
 
         //mBackground = WedrawUtils.getBitmapFromView(this);
@@ -87,11 +89,23 @@ public class DrawingView extends View {
         mPaint.setStrokeWidth(12);
     }
 
+    /**
+     * Sirve para poder actualizar el color del pincel con el que se esta dibujando
+     * @param color color que se quiere utilizar
+     * @param isWhite indica si el nuevo color es blanco
+     */
     public void setColor(int color, boolean isWhite) {
         mPaint.setColor(color);
         mPaint.setStrokeWidth( isWhite ? 30 : 12);
     }
 
+    /**
+     * Actualiza los valores de las diensiones cuando varía el tamaño de la pantalla. Es decir, al momento de robar el dispositivo
+     * @param w nuevo ancho
+     * @param h nuevo alto
+     * @param oldw ancho anterior
+     * @param oldh alto anterior
+     */
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -101,6 +115,10 @@ public class DrawingView extends View {
         mCanvas = new Canvas(mBitmap);
     }
 
+    /**
+     * Actualiza el canvas del dibujo para que muestre los trazos que se realizan sobre el mismo
+     * @param canvas
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -113,6 +131,11 @@ public class DrawingView extends View {
     private float mX, mY;
     private static final float TOUCH_TOLERANCE = 4;
 
+    /**
+     * Inicializa el path en un punto en especifico cuando se inicia el touch sobre la vista
+     * @param x coordenada x
+     * @param y coordenada y
+     */
     private void touch_start(float x, float y) {
         mPath.reset();
         mPath.moveTo(x, y);
@@ -120,6 +143,11 @@ public class DrawingView extends View {
         mY = y;
     }
 
+    /**
+     * Dibuja una linea desde el último punto en el cual se estaba posicionado hacia la nueva posición para dar el efecto de trazo continuo
+     * @param x coordenada x
+     * @param y coordenada y
+     */
     private void touch_move(float x, float y) {
         float dx = Math.abs(x - mX);
         float dy = Math.abs(y - mY);
@@ -134,6 +162,9 @@ public class DrawingView extends View {
         }
     }
 
+    /**
+     * Resetea el path cuando se deja de presionar la vista
+     */
     private void touch_up() {
         Log.i("WEDRAW","Destiny x: " + mX + "  Y: " + mY);
         mPath.lineTo(mX, mY);
@@ -145,10 +176,22 @@ public class DrawingView extends View {
     }
 
 
+    /**
+     * Dibuja un punto cuando es la realiza el touch por primera vez
+     * @param x coordenada x
+     * @param y coordenada y
+     */
     private void drawPoint(float x, float y){
         mCanvas.drawPoint(x,y,mPaint);
     }
 
+    boolean isFirst = false;
+
+    /**
+     * Detecta cuando se toca la vista para determina que accion debe tomar.
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(!isEnabled())
@@ -160,6 +203,7 @@ public class DrawingView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if(isDrawableSpot(x,y)) {
+                    isFirst = true;
                     touch_start(x, y);
                     mCanvas.drawPoint(x,y,mPaint);
                     ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.setPosition(x * 1.0 / getWidth(), y * 1.0 / getHeight()), null);
@@ -169,8 +213,16 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_MOVE:
                 Log.i("WEDRAW","Action move");
                 if(!isDrawableSpot(x,y)){
+                    isFirst = false;
                     break;
                 }
+
+                if(!isFirst){
+                    isFirst = true;
+                    touch_start(x, y);
+                    mCanvas.drawPoint(x,y,mPaint);
+                }
+
                 touch_move(x, y);
                 touch_up();
                 touch_start(x,y);
@@ -178,6 +230,7 @@ public class DrawingView extends View {
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
+                isFirst = false;
                 if(isDrawableSpot(x,y))
                     touch_up();
                 invalidate();
@@ -196,7 +249,6 @@ public class DrawingView extends View {
         try {
             int pixel = mBackground.getPixel((int) x, (int) y);
             int G = (pixel >> 8) & 0xff;
-            Log.i("WEDRAW","G: " + G*2);
             return G*2>255;
         }catch (IllegalArgumentException ex){
             return false;
