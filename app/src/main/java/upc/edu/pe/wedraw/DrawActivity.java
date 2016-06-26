@@ -306,6 +306,16 @@ public class DrawActivity extends AppCompatActivity implements SensorEventListen
             mSensorManager.unregisterListener(this);
     }
     //</editor-fold>
+
+    @Override
+    protected void onDestroy() {
+
+        ConnectionHelper.sDesaplgListener.setDrawActivity(null);
+        super.onDestroy();
+        StatusHelper.unbindDrawables(findViewById(R.id.layoutDraw));
+        System.gc();
+    }
+
     @Override
     public void onBackPressed() {}
 }

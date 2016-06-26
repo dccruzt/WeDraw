@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     tools:context="upc.edu.pe.wedraw.GuessActivity"
     android:orientation="vertical"
-    android:background="@drawable/background_pencil">
+    android:background="@drawable/background_pencil"
+    android:keepScreenOn="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,23 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            android:layout_alignParentRight="true"
-            >
-
-            <Button
-                android:id="@+id/activity_input_name_sound_button"
-                android:layout_width="@dimen/option_button"
-                android:layout_height="@dimen/option_button"
-                android:background="@drawable/sound"
-                android:layout_marginRight="16dp"
-                />
-
-            <Button
-                android:id="@+id/activity_input_name_info_button"
-                android:layout_width="@dimen/option_button"
-                android:layout_height="@dimen/option_button"
-                android:background="@drawable/info"
-                />
+            android:layout_alignParentRight="true">
         </LinearLayout>
 
     </RelativeLayout>

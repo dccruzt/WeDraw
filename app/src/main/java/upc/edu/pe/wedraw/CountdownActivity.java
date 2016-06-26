@@ -56,6 +56,16 @@ public class CountdownActivity extends Activity {
             }
         }, INTERVAL);
     }
+
+    @Override
+    protected void onDestroy() {
+
+        ConnectionHelper.sDesaplgListener.setCountdownActivity(null);
+        super.onDestroy();
+        StatusHelper.unbindDrawables(findViewById(R.id.layoutCountDown));
+        System.gc();
+    }
+
     @Override
     public void onBackPressed() {}
 }

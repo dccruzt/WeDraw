@@ -25,6 +25,8 @@ public class FinishActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish);
+        ConnectionHelper.sDesaplgListener.setFinishActivity(this);
+
         lblFinalJuego = (CustomTextView) findViewById(R.id.lblFinalJuego);
         btnSalir = (Button) findViewById(R.id.btnSalir);
         btnVolver = (Button) findViewById(R.id.btnVolver);
@@ -33,23 +35,10 @@ public class FinishActivity extends Activity {
             String mensaje = getIntent().getExtras().getString(PARAM_MESSAGE);
             lblFinalJuego.setText(mensaje);
         }
-        btnVolver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                volverAJugar();
-            }
-        });
-
-        btnSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                salir();
-            }
-        });
-
     }
 
-    private void volverAJugar(){
+    public void volverAJugar(View v){
+
         ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.playAgain(), new ResponseListener<Object>() {
             @Override
             public void onError(ServiceCommandError error) {
@@ -59,10 +48,9 @@ public class FinishActivity extends Activity {
             public void onSuccess(Object object) {
             }
         });
-
     }
 
-    private void salir(){
+    public void salir(View v){
 
         ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.close(), new ResponseListener<Object>() {
             @Override
@@ -74,8 +62,6 @@ public class FinishActivity extends Activity {
             }
         });
     }
-
-
 
     @Override
     protected void onDestroy() {

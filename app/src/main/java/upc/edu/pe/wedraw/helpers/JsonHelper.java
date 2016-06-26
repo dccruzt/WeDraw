@@ -60,6 +60,11 @@ public class JsonHelper {
         return getDefaultAction(StringsHelper.ERASE_DRAW);
     }
 
+    public static JSONObject showAbout(){
+
+        return getDefaultAction(StringsHelper.SHOW_ABOUT);
+    }
+
     public static JSONObject changeColor(String color){
 
         try {
@@ -155,8 +160,4 @@ public class JsonHelper {
             return null;
         }
     }
-
-
-
-
 }

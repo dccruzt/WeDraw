@@ -13,23 +13,21 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import com.connectsdk.service.capability.listeners.ResponseListener;
-import com.connectsdk.service.command.ServiceCommandError;
+import android.widget.TextView;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import upc.edu.pe.wedraw.connection.DesaplgListener;
 import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 import upc.edu.pe.wedraw.helpers.JsonHelper;
+import upc.edu.pe.wedraw.helpers.StatusHelper;
 
 public class DifficultyActivity extends SensorActivity implements View.OnClickListener{
 
     Button buttonEasy, buttonMedium, buttonHard;
+    TextView txtSensor;
     JsonHelper.Difficulties currentDifficulty;
 
     @Override
@@ -38,6 +36,7 @@ public class DifficultyActivity extends SensorActivity implements View.OnClickLi
         setContentView(R.layout.activity_difficulty);
         ConnectionHelper.sDesaplgListener.setDifficultyActivity(this);
 
+        txtSensor = (TextView) findViewById(R.id.txtSensor);
         buttonEasy = (Button) findViewById(R.id.buttonEasy);
         buttonMedium = (Button) findViewById(R.id.buttonMedium);
         buttonHard = (Button) findViewById(R.id.buttonHard);
@@ -49,6 +48,11 @@ public class DifficultyActivity extends SensorActivity implements View.OnClickLi
         buttonEasy.setOnTouchListener(new PressingListenerHandler());
         buttonMedium.setOnTouchListener(new PressingListenerHandler());
         buttonHard.setOnTouchListener(new PressingListenerHandler());
+
+        if(isSensorAvailable)
+        {
+            txtSensor.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -69,6 +73,7 @@ public class DifficultyActivity extends SensorActivity implements View.OnClickLi
 
         if(!isSensorAvailable)
             startGame();
+
     }
 
     /**
@@ -141,6 +146,15 @@ public class DifficultyActivity extends SensorActivity implements View.OnClickLi
                 startGame();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        ConnectionHelper.sDesaplgListener.setDifficultyActivity(null);
+        super.onDestroy();
+        StatusHelper.unbindDrawables(findViewById(R.id.layoutDifficulty));
+        System.gc();
     }
     //</editor-fold>
     @Override

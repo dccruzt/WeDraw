@@ -28,22 +28,27 @@ public class ConnectionHelper {
     public static DesaplgListener sDesaplgListener;
     public static Context sContext;
 
-    public static void closeApplication() {
-        sWebAppSession.close(new ResponseListener<Object>() {
-            @Override
-            public void onSuccess(Object object) {
+    public static void closeApplication(boolean cerrarWebapp) {
 
+
+        if(cerrarWebapp) {
+            sWebAppSession.close(new ResponseListener<Object>() {
+                @Override
+                public void onSuccess(Object object) {
+
+                }
+
+                @Override
+                public void onError(ServiceCommandError error) {
+
+                }
+            });
+
+            if (sWebAppSession != null) {
+                sWebAppSession.disconnectFromWebApp();
+                sWebAppSession = null;
             }
-
-            @Override
-            public void onError(ServiceCommandError error) {
-
-            }
-        });
-
-        if (sWebAppSession != null) {
-            sWebAppSession.disconnectFromWebApp();
-            sWebAppSession = null;
         }
+        System.exit(1);
     }
 }

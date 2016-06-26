@@ -14,6 +14,7 @@ public class StatusHelper {
     public static String currentHint;
     public static boolean isMyTurnToDraw = false;
     public static String word = "";
+    public static boolean conexionExitosa = false;
 
     public static void unbindDrawables(View view) 
     {

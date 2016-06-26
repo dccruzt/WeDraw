@@ -89,7 +89,7 @@ public class DrawingView extends View {
 
     public void setColor(int color, boolean isWhite) {
         mPaint.setColor(color);
-        mPaint.setStrokeWidth( isWhite ? 20 : 12);
+        mPaint.setStrokeWidth( isWhite ? 30 : 12);
     }
 
     @Override

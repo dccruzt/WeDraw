@@ -8,6 +8,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import upc.edu.pe.wedraw.interfaces.MySensorEventListener;
@@ -27,6 +29,7 @@ public abstract class SensorActivity extends AppCompatActivity implements Sensor
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         //validate that sensor is available, before showing the activity
         isSensorAvailable = null != (mSensor = mSensorManager.getDefaultSensor(getSensorType()));

@@ -2,11 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutInputName"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_pencil"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,7 +20,7 @@
             android:layout_width="@dimen/logo_size_small"
             android:layout_height="@dimen/logo_size_small"
             android:visibility="visible"
-            android:src="@drawable/logo_upc"/>
+            android:src="@drawable/logo"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -29,18 +32,11 @@
             >
 
             <Button
-                android:id="@+id/activity_input_name_sound_button"
-                android:layout_width="@dimen/option_button"
-                android:layout_height="@dimen/option_button"
-                android:background="@drawable/sound"
-                android:layout_marginRight="16dp"
-                />
-
-            <Button
                 android:id="@+id/activity_input_name_info_button"
                 android:layout_width="@dimen/option_button"
                 android:layout_height="@dimen/option_button"
                 android:background="@drawable/info"
+                android:onClick="mostrarCreditos"
                 />
         </LinearLayout>
 

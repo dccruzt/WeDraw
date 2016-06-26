@@ -8,7 +8,8 @@
     android:padding="8dp"
     android:background="@drawable/connect_background"
     android:orientation="vertical"
-    tools:context="upc.edu.pe.wedraw.DrawActivity">
+    tools:context="upc.edu.pe.wedraw.DrawActivity"
+    android:keepScreenOn="true">
 
 
 

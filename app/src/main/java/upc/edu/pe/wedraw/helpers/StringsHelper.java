@@ -30,6 +30,7 @@ public class StringsHelper {
     public static final String CHANGE_COLOR = "cambiarColor";
     public static final String FINISH_GAME = "salir";
     public static final String PLAY_AGAIN = "volverAjugar";
+    public static final String SHOW_ABOUT = "mostrarCreditos";
 
 
     public static final String DISCONNECT_PLAYER = "desconectarJugador";
@@ -42,4 +43,8 @@ public class StringsHelper {
     public static final String GET_HINT = "enviarPista";
     public static final String END_TURN = "terminarTurno";
     public static final String GAME_WINNER = "ganadorJuego";
+    public static final String CLOSE_APP = "cerrarAplicacion";
+    public static final String START_OVER = "cargarNuevoInicio";
+    public static final String SUCCESS_CONNECTION = "conexionExitosa";
+    public static final String LIMIT_PLAYERS = "limiteJugadores";
 }

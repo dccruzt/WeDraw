@@ -55,9 +55,11 @@ public class TurnHintActivity extends Activity {
     @Override
     protected void onDestroy() {
         ConnectionHelper.sDesaplgListener.setTurnHintActivity(null);
-        System.gc();
         super.onDestroy();
+        StatusHelper.unbindDrawables(findViewById(R.id.layoutTurnHint));
+        System.gc();
     }
+
     @Override
     public void onBackPressed() {}
 

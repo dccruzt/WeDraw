@@ -60,8 +60,9 @@ public class GuessActivity extends Activity implements View.OnClickListener{
         butGuess.setOnClickListener(this);
 
         txtPlayerName.setText(StatusHelper.playerName);
-        txtHint.setText(StatusHelper.currentHint);
 
+        StatusHelper.currentHint.replace(" ","   ");
+        txtHint.setText(StatusHelper.currentHint);
     }
 
     /*private static final ScheduledExecutorService worker =
@@ -113,8 +114,8 @@ public class GuessActivity extends Activity implements View.OnClickListener{
     }
 
     public void actualizarPista(){
-        String text = StatusHelper.currentHint.replace(" ","   ");
-        txtHint.setText(text);
+        //String text = StatusHelper.currentHint.replace(" ","   ");
+        txtHint.setText(StatusHelper.currentHint);
     }
 
     /**
@@ -124,14 +125,28 @@ public class GuessActivity extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         String word = eteWord.getText().toString().trim().toLowerCase();
+        eteWord.setText("");
+
         if(word.length()<0)
             return;
 
         if(word.equals(StatusHelper.word))
             ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.guessWord(true, ""), null);
-        else
+        else {
             ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.guessWord(false, word), null);
+            Toast.makeText(getApplicationContext(), "La palabra no es correcta.", Toast.LENGTH_SHORT).show();
+        }
     }
+
+    @Override
+    protected void onDestroy() {
+
+        ConnectionHelper.sDesaplgListener.setGuessActivity(null);
+        super.onDestroy();
+        StatusHelper.unbindDrawables(findViewById(R.id.layoutGuess));
+        System.gc();
+    }
+
     @Override
     public void onBackPressed() {}
 

@@ -27,6 +27,7 @@ import upc.edu.pe.wedraw.LoadingActivity;
 import upc.edu.pe.wedraw.SplashActivity;
 import upc.edu.pe.wedraw.StartGameActivity;
 import upc.edu.pe.wedraw.TurnHintActivity;
+import upc.edu.pe.wedraw.helpers.ConnectionHelper;
 import upc.edu.pe.wedraw.helpers.StatusHelper;
 import upc.edu.pe.wedraw.helpers.StringsHelper;
 
@@ -168,8 +169,15 @@ public class DesaplgListener implements WebAppSessionListener{
                 terminarTurno();
             }else if (accion.equals(StringsHelper.GAME_WINNER)) {
                 ganadorJuego(json.getJSONArray(StringsHelper.RESULT));
+            }else if (accion.equals(StringsHelper.START_OVER)) {
+                cargarNuevoInicio();
+            }else if (accion.equals(StringsHelper.CLOSE_APP)) {
+                cerrarAplicacion(json.getBoolean(StringsHelper.RESULT));
+            }else if (accion.equals(StringsHelper.SUCCESS_CONNECTION)) {
+                conexionExitosa();
+            }else if (accion.equals(StringsHelper.LIMIT_PLAYERS)) {
+                limiteJugadores();
             }
-
 
         }catch (Exception e){
 
@@ -274,9 +282,9 @@ public class DesaplgListener implements WebAppSessionListener{
 
 
         if(ganadores.length() > 1)
-            lblFinal = "¡FELICITACIONES A " + nombres + "!\n¡SON LOS GANADORES DE TIE-A-WORD!";
+            lblFinal = "¡FELICITACIONES A " + nombres + "!\n¡SON LOS GANADORES DE WEDRAW!";
         else
-            lblFinal = "¡FELICITACIONES A " + nombres + "!\n¡ES EL GANADOR DE TIE-A-WORD!";
+            lblFinal = "¡FELICITACIONES A " + nombres + "!\n¡ES EL GANADOR DE WEDRAW!";
 
 
         Activity activity = StatusHelper.isMyTurnToDraw ? getDrawActivity() : getGuessActivity();
@@ -284,7 +292,33 @@ public class DesaplgListener implements WebAppSessionListener{
         i.putExtra(FinishActivity.PARAM_MESSAGE, lblFinal);
         activity.startActivity(i);
         activity.finish();
+    }
 
+    public void cargarNuevoInicio(){
+
+        if(getFinishActivity() != null) {
+            Intent i = new Intent(getFinishActivity(), InputNameActivity.class);
+            getFinishActivity().startActivity(i);
+            getFinishActivity().finish();
+            StatusHelper.btnJugar_activo = false;
+        }
+    }
+
+    public void cerrarAplicacion(boolean cerrarWebapp){
+
+        ConnectionHelper.closeApplication(cerrarWebapp);
+    }
+
+    public void limiteJugadores(){
+
+        if(getInputNameActivity() != null)
+            getInputNameActivity().limiteJugadores();
+    }
+
+    public void conexionExitosa(){
+
+        if(getInputNameActivity() != null)
+            getInputNameActivity().conexionExitosa();
     }
 
 

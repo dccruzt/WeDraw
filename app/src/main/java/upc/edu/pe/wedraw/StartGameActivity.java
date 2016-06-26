@@ -82,6 +82,15 @@ public class StartGameActivity extends AppCompatActivity{
             txtHint.setText(getString(R.string.waiting_players));
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        ConnectionHelper.sDesaplgListener.setStartGameActivity(null);
+        System.gc();
+        StatusHelper.unbindDrawables(findViewById(R.id.layoutStartGame));
+        super.onDestroy();
+    }
+
     @Override
     public void onBackPressed() {}
 }

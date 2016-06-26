@@ -45,18 +45,14 @@ public class InputNameActivity extends Activity{
                 //Verificar nombre es menor de 20 caracteres
                 final String name = mNameEditText.getText().toString().trim();
 
-                if(Pattern.matches(NAME_REGEX, name) && name.length()<=20){
+                if(Pattern.matches(NAME_REGEX, name) && name.length() <= 14){
                     //Enviar el nombre al webapp
                     ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.ConnectPlayer(name), new ResponseListener<Object>() {
                         @Override
                         public void onSuccess(Object object) {
-                            Toast.makeText(getApplicationContext(), NAME_SUCCESS, Toast.LENGTH_SHORT);
                             StatusHelper.playerName = name;
                             MediaPlayer mp = MediaPlayer.create(InputNameActivity.this, R.raw.conectado);
                             mp.start();
-
-                            Intent i = new Intent(InputNameActivity.this, StartGameActivity.class);
-                            startActivity(i);
                         }
                         @Override
                         public void onError(ServiceCommandError error) {
@@ -70,10 +66,38 @@ public class InputNameActivity extends Activity{
         });
     }
 
+    public void mostrarCreditos(View v){
+
+        ConnectionHelper.sWebAppSession.sendMessage(JsonHelper.showAbout(), new ResponseListener<Object>() {
+            @Override
+            public void onSuccess(Object object) {
+            }
+            @Override
+            public void onError(ServiceCommandError error) {
+            }
+        });
+    }
+
+    public void conexionExitosa(){
+
+        Toast.makeText(getApplicationContext(), NAME_SUCCESS, Toast.LENGTH_SHORT);
+        StatusHelper.conexionExitosa = true;
+        Intent i = new Intent(InputNameActivity.this, StartGameActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void limiteJugadores(){
+
+        Toast toast = Toast.makeText(getApplicationContext(), "Usted no se puede conectar porque ha execdido la cantidad de jugadores posibles.", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
     @Override
     protected void onDestroy() {
         ConnectionHelper.sDesaplgListener.setInputNameActivity(null);
         System.gc();
+        StatusHelper.unbindDrawables(findViewById(R.id.layoutInputName));
         super.onDestroy();
     }
     @Override
