@@ -24,7 +24,7 @@ import upc.edu.pe.wedraw.helpers.StatusHelper;
 public class InputNameActivity extends Activity{
 
     private static final String NAME_REGEX = "[A-Za-z\\s+]{1,20}";
-    private static final String NAME_ERROR = "Ingrese un nombre. Maximo 20 caracteres";
+    private static final String NAME_ERROR = "Ingrese un nombre. Maximo 14 caracteres";
     private static final String NAME_SUCCESS = "Conectado";
 
     EditText mNameEditText;

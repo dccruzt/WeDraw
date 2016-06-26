@@ -1,19 +1,14 @@
 package upc.edu.pe.wedraw;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -143,7 +138,11 @@ public class DifficultyActivity extends SensorActivity implements View.OnClickLi
                     mTask = null;
                 else
                     mTask.cancel(true);
-                startGame();
+
+                if(currentDifficulty != null)
+                    startGame();
+                else
+                    Toast.makeText(getApplicationContext(), "No ha seleccionado la dificultad.", Toast.LENGTH_SHORT).show();
             }
         }
     }
